@@ -7,9 +7,8 @@ object Loops {
   def main(args: Array[String]) {
     val ints=List(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
     imperativeLoop(ints)
-    recursion(ints)
-
-    println(product(List(1,2,3,4)))
+//    recursion(ints)
+//    println(product(List(1,2,3,4)))
   }
 
 
