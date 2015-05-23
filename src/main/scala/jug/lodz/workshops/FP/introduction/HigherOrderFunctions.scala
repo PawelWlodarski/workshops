@@ -6,18 +6,12 @@ object HigherOrderFunctions {
   type Comparator=(Int,Int)=>Boolean
 
   def main(args: Array[String]) {
-    //hofInDisquise()
+    hofInDisquise()
     /*println{
       customMap(List(1,2,3,4,5),_*2)
     }*/
-    testHighOrderedFunction()
+    //testHighOrderedFunction()
   }
-
-  def customMap(l:List[Int],f:Int=>Int):List[Int]=
-    if(l.isEmpty)
-      List[Int]()
-    else
-      f(l.head) :: customMap(l.tail,f)
 
   def hofInDisquise()={
     val list=List(1,2,3,4,5,6,7,8,9,10)
@@ -29,6 +23,12 @@ object HigherOrderFunctions {
     println(s"reduction strategy : ${list reduce addStrategy}")
     println(s"reversed comparator ${list sortWith reverseCompareStrategy}")
   }
+
+  def customMap(l:List[Int],f:Int=>Int):List[Int]=
+    if(l.isEmpty)
+      List[Int]()
+    else
+      f(l.head) :: customMap(l.tail,f)
 
 
   def testHighOrderedFunction(): Unit ={
