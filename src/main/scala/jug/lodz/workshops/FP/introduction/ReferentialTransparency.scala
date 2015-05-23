@@ -5,24 +5,12 @@ import scala.StringBuilder
 object ReferentialTransparency {
 
   def main(args: Array[String]) {
-    //testingReferentialTransparency
+    testingReferentialTransparency
     //lackOfReferentialTransparency
     //stringRealLifeRF
-    stringRealLifeLackOfRF
+    //stringRealLifeLackOfRF
   }
 
-  def lackOfReferentialTransparency: Unit = {
-    def a = {println("sideeffect");2}
-    val b = a + 1
-
-    val c = a + 2
-    println(s"result b=$b, c=$c")
-
-    val b2 = 2 + 1
-    val c2 = 2 + 2
-
-    println(s"after substitution we don't have side effects: result b2=$b2, c2=$c2")
-  }
   def testingReferentialTransparency: Unit = {
     val a = 2
     val b = a + 1
@@ -34,6 +22,18 @@ object ReferentialTransparency {
     val c2 = 2 + 2
 
     println(s"after substitution everything is the same : result b2=$b2, c2=$c2")
+  }
+  def lackOfReferentialTransparency: Unit = {
+    def a = {println("sideeffect");2}
+    val b = a + 1
+
+    val c = a + 2
+    println(s"result b=$b, c=$c")
+
+    val b2 = 2 + 1
+    val c2 = 2 + 2
+
+    println(s"after substitution we don't have side effects: result b2=$b2, c2=$c2")
   }
 
   def stringRealLifeRF: Unit = {
