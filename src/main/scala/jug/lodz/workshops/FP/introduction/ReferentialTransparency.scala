@@ -8,7 +8,7 @@ object ReferentialTransparency {
     testingReferentialTransparency
     //lackOfReferentialTransparency
     //stringRealLifeRF
-    //stringRealLifeLackOfRF
+//    stringRealLifeLackOfRF
   }
 
   def testingReferentialTransparency: Unit = {
