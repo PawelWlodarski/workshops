@@ -33,21 +33,21 @@ object ThinkInTypes {
 
   def phantomTypesExample: Unit ={
     sealed trait Status
-    trait NotValidated extends Status
-    trait Validated extends Status
+    trait Created extends Status
+    trait Notified extends Status
 
     case class User[A <: Status](name:String)
-    def newUser(name:String)=User[NotValidated](name)
+    def newUser(name:String)=User[Created](name)
 
-    def validate(u:User[NotValidated]):User[Validated]= u.copy[Validated]()
-    def securedLogic(u:User[Validated])=println(s"this is secured during compilation : $u")
+    def notify(u:User[Created]):User[Notified]= u.copy[Notified]()
+    def securedLogic(u:User[Notified])=println(s"this is secured during compilation : $u")
 
     val u=newUser("Roman")
 
    // this lines doesn't compile = check why
    // securedLogic(u)
-    val validatedUSer=validate(u)
-    securedLogic(validatedUSer)
+    val notifiedUser=notify(u)
+    securedLogic(notifiedUser)
 
   }
 }

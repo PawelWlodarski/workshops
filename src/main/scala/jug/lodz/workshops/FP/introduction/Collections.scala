@@ -26,7 +26,7 @@ object Collections {
   def testingMutableCollections: Unit = {
     val mutableList = scala.collection.mutable.ListBuffer(2, 3, 4, 5) //ListBuffer(2, 3, 4, 5)
     val mutableList2 = mutableList.tail //ListBuffer(3, 4, 5)
-    mutableList2.prepend(1) //res3: Unit = () !!!!
-    mutableList2.tail eq mutableList //Boolean = false
+    println(mutableList2.prepend(1)) //res3: Unit = () !!!!
+    println(mutableList2.tail eq mutableList) //Boolean = false
   }
 }
