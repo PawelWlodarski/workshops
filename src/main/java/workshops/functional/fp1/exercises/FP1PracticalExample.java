@@ -13,7 +13,7 @@ public class FP1PracticalExample {
     static private Map<Integer,Purchase> database=initDatabase();
 
     public static Optional<Purchase> findPurchase(Integer id){
-        throw new RuntimeException("not implemented");
+        throw new UnsupportedOperationException();
     }
 
     static Function<Purchase,Collection<BigDecimal>> domainFunction = null;
