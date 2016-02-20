@@ -29,7 +29,7 @@ class ScalaFP1PracticalExampleCheck extends PropSpec with Matchers with Property
   } yield Purchase(new PurchaseId(id),products)
 
 
-  property("Math generic function should sum all nig decimals"){
+  property("Math generic function should sum all decimals"){
     forAll(bigDecimalList){ (bs: List[BigDecimal]) =>
         MathLib.genericMathFunction(bs) shouldBe bs.sum
     }
