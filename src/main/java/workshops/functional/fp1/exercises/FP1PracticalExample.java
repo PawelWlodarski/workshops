@@ -51,7 +51,7 @@ class Product{
     final String name;
     final BigDecimal price;
 
-    public Product(String name, BigDecimal price) {
+    public Product(final String name, final BigDecimal price) {
         this.name = name;
         this.price = price;
     }
@@ -61,9 +61,9 @@ class Purchase{
     final Integer id;
     private final List<Product> purchasedProducts;
 
-    public Purchase(Integer id, List<Product> purchasedProducts) {
+    public Purchase(final Integer id, final List<Product> purchasedProducts) {
         this.id = id;
-        this.purchasedProducts = purchasedProducts;
+        this.purchasedProducts = new ArrayList<>(purchasedProducts);
     }
 
     public List<Product> getPurchasedProducts() {
