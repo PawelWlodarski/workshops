@@ -111,7 +111,7 @@ object FPMechanicsSolutions {
       try{
         Some(operation)
       }catch{
-        case _=> None
+        case _:Exception=> None
       }
     }
 
