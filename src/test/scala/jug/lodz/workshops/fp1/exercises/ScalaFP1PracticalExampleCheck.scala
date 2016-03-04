@@ -9,6 +9,9 @@ import org.scalatest.{Matchers, PropSpec}
   */
 class ScalaFP1PracticalExampleCheck extends PropSpec with Matchers with PropertyChecks{
 
+  import jug.lodz.workshops.fp1.exercises.ScalaFp1PracticalExample.DomainLib._
+  import jug.lodz.workshops.fp1.exercises.ScalaFp1PracticalExample.MathLib
+
   //Math Generators
   val smallDecimals=Gen.choose(0,1000).map((v:Int) => BigDecimal(v))
 
@@ -26,7 +29,7 @@ class ScalaFP1PracticalExampleCheck extends PropSpec with Matchers with Property
   val purchaseGen= for{
     products <- productListGen
     id <- Arbitrary.arbitrary[Int]
-  } yield Purchase(new PurchaseId(id),products)
+  } yield Purchase(id,products)
 
 
   property("Math generic function should sum all decimals"){

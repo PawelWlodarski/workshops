@@ -5,6 +5,18 @@ package jug.lodz.workshops.fp1.answers
   */
 object ScalaFp1PracticalExampleAnswer {
 
+  import MathLib._
+  import DomainLib._
+
+
+  //Our custom domain lib
+  object DomainLib{
+    case class Product(name:String,price: BigDecimal)
+    case class Purchase(id:Int,purchasedProducts:List[Product])
+  }
+
+
+  //Database emulation
   private val products:Map[String,Product]=Map(
     "tv"->Product("tv",BigDecimal("3000")),
     "keyboard"->Product("keyboard",BigDecimal("120")),
@@ -13,35 +25,36 @@ object ScalaFp1PracticalExampleAnswer {
 
   )
 
-  private val database:Map[PurchaseId,Purchase] =Map(
-      PurchaseId(1) -> Purchase(PurchaseId(1),List(products("tv"),products("headphones"))),
-      PurchaseId(1) -> Purchase(PurchaseId(1),List(products("keyboard"),products("headphones"),products("mouse")))
+  private val database:Map[Int,Purchase] =Map(
+    1 -> Purchase(1,List(products("tv"),products("headphones"))),
+    2 -> Purchase(2,List(products("keyboard"),products("headphones"),products("mouse")))
   )
 
-  //lab
-  def findPurchase(id:PurchaseId):Option[Purchase] = database.get(id)
+  //Some very generic Math lib
+  object MathLib {
+    //lab
+    val genericMathFunction:Seq[BigDecimal]=>BigDecimal = sq => sq.foldLeft(BigDecimal(0))((a,b)=>a+b)
+  }
 
-  val domainFunction: Purchase => Seq[BigDecimal] = p=>p.purchasedProducts.map(p=>p.price)
+  //lab
+  val domainFunction: Purchase => Seq[BigDecimal] = p => p.purchasedProducts.map(prod=>prod.price)
+
+  //lab
+  def findPurchase(id:Int):Option[Purchase] = database.get(id)
+
 
   def main(args: Array[String]) {
-    import MathLib._
+    //Composition of two completely independent pure function
     val pureDomainFunction: (Purchase) => BigDecimal =domainFunction andThen genericMathFunction
 
-    findPurchase(new PurchaseId(1)).map(pureDomainFunction).foreach(println)
-    val purchase3Price: BigDecimal =findPurchase(new PurchaseId(3)).map(pureDomainFunction)
+    //CORRECT CASE SCENARIO - THERE IS A PURCHASE WITH ID=1 IN THE DATABASE
+    findPurchase(1).map(pureDomainFunction).foreach(println)
+
+
+    // FAILURE CASE SCENARIO - THERE IS NO PURCHASE WITH ID=3 IN THE DATABASE
+    val purchase3Price: BigDecimal =findPurchase(3).map(pureDomainFunction)
       .getOrElse(throw new RuntimeException("there is no purchase with id 3"))
 
     println(s"somehow there is a purchase with id 3 : $purchase3Price")
   }
-
 }
-
-object MathLib {
-  val genericMathFunction:Seq[BigDecimal]=>BigDecimal = bs=>bs.fold(BigDecimal(0))((a,b) => a + b)
-    //bs=>bs.reduce((a,b)=>a+b) -- throws exception in scalacheck
-}
-
-case class PurchaseId(val id:Int) extends AnyVal
-
-case class Product(name:String,price: BigDecimal)
-case class Purchase(id:PurchaseId,purchasedProducts:List[Product])
