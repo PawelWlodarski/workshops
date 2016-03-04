@@ -29,7 +29,7 @@ object ScalaFP1ComposeFunctions {
 //    println(andThenSeq(Seq(x=>x+1,x=>x*2,x=>x+5))(3)==13)
 
   }
-
+  //  customAndThen(f1:Function[String,Int], f2:Function[Int,List[Int]]):Function[String,List[Int]]
   def customAndThen(f1:String=>Int, f2:Int=>List[Int]):String=>List[Int] = ???
   def customCompose(f1:Int=>List[Int], f2:String=>Int):String=>List[Int] = ???
 
