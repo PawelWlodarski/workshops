@@ -5,39 +5,67 @@ package jug.lodz.workshops.fp1.answers
   */
 object ScalaFP1ExercisesFunctionImplementationAnswer {
 
+  //FUNCTION IMPLEMENTATION
+  // example 1 - standard form
   val addOneToX: Int=>Int = x => x+1
-  val multiplyXByTwo: Int=>Int = x => x*2
 
-  val addOntToXShort:Int=>Int = _+1
+  //example 2 - without alias type
+  val addOneToXNoAlias: Function[Int,Int] = x => x+1
 
-  val addOntToXFull:Function[Int,Int]=new Function[Int,Int]{
+  //example 3 - Full declaration
+  val addOneToXFull:Function[Int,Int]=new Function[Int,Int]{
     override def apply(v1: Int): Int = v1+1
   }
 
-  //exercise
-  val multiplyByTwoShort:Int=>Int = _*2
+  //example 4 - shortest form with underscore
+  val addOneToXShort:Int=>Int = _+1
 
-  val multiplyByTwoFull:Function1[Int,Int]=new Function[Int,Int] {
+
+  //EXERCISE1
+  lazy val multiplyXByTwo: Int=>Int = x=>x*2
+  lazy val multiplyXByTwoNoAlias: Function[Int,Int] = x=>x*2
+  lazy val multiplyXByTwoFull:Function[Int,Int] = new Function[Int,Int] {
     override def apply(v1: Int): Int = v1*2
   }
+  lazy val multiplyXByTwoShort:Int=>Int = _ *2
+
+  //ADDITIONAL EXERCISE
+  lazy val addTwoNumbers: (Int,Int) => Int = (a,b) => a+b
+  lazy val addTwoNumbersNoAlias: Function2[Int,Int,Int]= (a,b) => a+b
+  lazy val addTwoNumbersLong: Function2[Int,Int,Int] = new Function2[Int,Int,Int] {
+    override def apply(v1: Int, v2: Int): Int = v1+v2
+  }
+  lazy val addTwoNumbersShort: (Int,Int) => Int = _+_
 
   def main(args: Array[String]) {
-    //1
-    println("example 1")
-    (1 to 10).map(addOneToX).foreach(x=>print(x+","))
+    //DEMONSTRATION
+    println("Demonstration f(x) = x+1")
+    println("standard form  : " + addOneToX(1))
+    println("without Alias  : " + addOneToXNoAlias(1))
+    println("full form  :     " + addOneToXFull(1))
+    println("shortest form  : " + addOneToXShort(1))
 
-    println("\nexample 2")
-    (1 to 10) map multiplyXByTwo  foreach(x=>print(x+","))
+    //EXERCISE 1
+    println("EXERCISE1")
+    println(multiplyXByTwo(1) == 2)
+    println(multiplyXByTwo(2) == 4)
+    println(multiplyXByTwoNoAlias(3) == 6)
+    println(multiplyXByTwoNoAlias(1) == 2)
+    println(multiplyXByTwoFull(1)==2 )
+    println(multiplyXByTwoFull(5)==10)
+    println(multiplyXByTwoShort(11)==22 )
+    println(multiplyXByTwoShort(110)==220 )
 
-    println("\nexample 3")
-    (1 to 10).map(addOntToXShort).foreach(x=>print(x+","))
-
-    println("\nexample 4")
-    (1 to 10).map(addOntToXFull).foreach(x=>print(x+","))
-
-    //exercise
-    println("\nexercise")
-    (1 to 10).map(multiplyByTwoFull).foreach(x=>print(x+","))
+    //ADDITIONAL EXERCISE
+    println("ADDITIONAL EXERCISE")
+    println(addTwoNumbers(1,2)==3)
+    println(addTwoNumbers(2,5)==7)
+    println(addTwoNumbersNoAlias(1,2)==3)
+    println(addTwoNumbersNoAlias(2,5)==7)
+    println(addTwoNumbersLong(1,2)==3)
+    println(addTwoNumbersLong(2,5)==7)
+    println(addTwoNumbersShort(1,2)==3)
+    println(addTwoNumbersShort(2,5)==7)
 
   }
 }

@@ -12,25 +12,25 @@ class ScalaFP1ExercisesFunctionImplementationAnswerCheck extends PropSpec with M
 
   property("Full Function of function f(x)=x+1 should return the same result as standard implementation"){
     forAll{(x:Int) =>
-      addOntToXFull(x) shouldBe(addOneToX(x))
+      addOneToXFull(x) shouldBe(addOneToX(x))
     }
   }
 
   property("Short Form of Function f(x)=x+1 should return the same result as standard implementation"){
     forAll{(x:Int) =>
-      addOntToXShort(x) shouldBe(addOneToX(x))
+      addOneToXShort(x) shouldBe(addOneToX(x))
     }
   }
 
   property("Full Function of function f(x)=x*2 should return the same result as standard implementation"){
     forAll{(x:Int) =>
-      multiplyByTwoFull(x) shouldBe(multiplyXByTwo(x))
+      multiplyXByTwoFull(x) shouldBe(multiplyXByTwo(x))
     }
   }
 
   property("Short Form of Function f(x)=x*2 should return the same result as standard implementation"){
     forAll{(x:Int) =>
-      multiplyByTwoShort(x) shouldBe(multiplyXByTwo(x))
+      multiplyXByTwoShort(x) shouldBe(multiplyXByTwo(x))
     }
   }
 
