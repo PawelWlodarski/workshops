@@ -23,6 +23,9 @@ object ScalaFP1BufferExercises {
   def uncurry[A,B,C](f: A=>B=>C) : (A,B)=>C= ???
 
 
+  //DEMONSTRATION - CURRYING WITH METHODS
+  def curriedAddMethod(a:Int)(b:Int)(c:Int)=a+b+c
+
   def main(args: Array[String]) {
     println("DEMONSTRATION : PARTIAL APPLICATION")
     println(calculateTax(0.5,100)==50)
@@ -51,6 +54,12 @@ object ScalaFP1BufferExercises {
 //    println(curry(calculateTax)(0.23)(200)==46)
 //    println(uncurry(curriedTax)(0.23,100)==23)
 //    println(uncurry(curriedTax)(0.23,200)==46)
+
+
+//    println("DEMONSTRATION - CURRYING WITH METHODS")
+//    println(curriedAddMethod(1) _)
+//    println(curriedAddMethod(1)(2) _)
+//    println(curriedAddMethod(1)(2)(3)==6)
   }
 
 }
