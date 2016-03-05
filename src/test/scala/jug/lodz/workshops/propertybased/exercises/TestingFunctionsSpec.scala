@@ -27,6 +27,7 @@ class TestingFunctionsSpec extends PropSpec with Matchers with PropertyChecks {
   }
 
   val intTointFunctions:Gen[Int=>Int]=Gen.oneOf((x:Int)=>x+1,(x:Int)=>x*2,(x:Int)=>x%10)
+  val stringToIntFunctions:Gen[String=>Int]=Gen.oneOf((s:String)=>s.toInt,(s:String)=>s.length)
 
   property("generator should generate a funcion"){
     forAll(intTointFunctions){ f:(Int=>Int) =>
@@ -34,7 +35,6 @@ class TestingFunctionsSpec extends PropSpec with Matchers with PropertyChecks {
     }
   }
 
-  val stringToIntFunctions:Gen[String=>Int]=Gen.oneOf((s:String)=>s.toInt,(s:String)=>s.length)
 
 
   //EXERCISES
