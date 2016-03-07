@@ -31,11 +31,11 @@ object ScalaFp1PracticalExample {
 
   //Some very generic Math lib
   object MathLib {
-    //lab
+    //lab   Function[Seq[BigDecimal],BigDecimal]
     val genericMathFunction:Seq[BigDecimal]=>BigDecimal = ???
   }
 
-  //lab
+  //lab Function[Purchase, Seq[BigDecimal]]
   val domainFunction: Purchase => Seq[BigDecimal] = ???
 
   //lab

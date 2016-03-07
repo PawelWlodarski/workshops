@@ -42,15 +42,15 @@ object ScalaFP1ExercisesFunctionImplementation {
     println("shortest form  : " + addOneToXShort(1))
 
     //EXERCISE 1
-    println("EXERCISE1")
-    println(multiplyXByTwo(1) == 2)
-    println(multiplyXByTwo(2) == 4)
-    println(multiplyXByTwoNoAlias(3) == 6)
-    println(multiplyXByTwoNoAlias(1) == 2)
-    println(multiplyXByTwoFull(1)==2 )
-    println(multiplyXByTwoFull(5)==10)
-    println(multiplyXByTwoShort(11)==22 )
-    println(multiplyXByTwoShort(110)==220 )
+//    println("EXERCISE1")
+//    println(multiplyXByTwo(1) == 2)
+//    println(multiplyXByTwo(2) == 4)
+//    println(multiplyXByTwoNoAlias(3) == 6)
+//    println(multiplyXByTwoNoAlias(1) == 2)
+//    println(multiplyXByTwoFull(1)==2 )
+//    println(multiplyXByTwoFull(5)==10)
+//    println(multiplyXByTwoShort(11)==22 )
+//    println(multiplyXByTwoShort(110)==220 )
 
     //ADDITIONAL EXERCISE
 //    println("ADDITIONAL EXERCISE")
