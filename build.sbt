@@ -9,4 +9,3 @@ libraryDependencies += "junit" % "junit" % "4.12"
 libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.5" % "test"
 
 libraryDependencies += "org.typelevel" %% "cats" % "0.4.1"
-libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.2.1"
