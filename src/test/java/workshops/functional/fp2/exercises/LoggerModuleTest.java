@@ -22,9 +22,7 @@ public class LoggerModuleTest {
         testableLogger.accept("message3");
 
         /*
-        import static org.hamcrest.CoreMatchers.hasItems;
-        import static org.junit.Assert.assertThat;
-        assertThat(???,hasItems(???));
+        import static org.assertj.core.api.Assertions.*;
          */
     }
 

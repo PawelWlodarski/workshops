@@ -7,8 +7,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.function.Consumer;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.*;
+
+
 
 /**
  * Created by pwlodarski on 2016-03-08.
@@ -25,7 +26,7 @@ public class LoggerModuleAnswerTest {
         testableLogger.accept("message2");
         testableLogger.accept("message3");
 
-        assertThat(loggerWithMemory.getLogs(),hasItems("message1","message2","message3"));
+        assertThat(loggerWithMemory.getLogs()).contains("message1","message2","message3");
     }
 
     private class TestableLogger implements LoggerModuleAnswer.Logging{
