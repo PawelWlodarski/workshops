@@ -9,9 +9,9 @@ import java.util.function.Function;
 public class LoggerModule {
 
     //Lab
-    public Function<Logging,Consumer<String>> createLogger = null;
+    public static Function<Logging,Consumer<String>> createLogger = null;
 
-    public Consumer<String> defaultLogger= createLogger.apply(new DefaultLogger());
+    public static Consumer<String> defaultLogger= createLogger.apply(new DefaultLogger());
 
 
     public interface Logging{
@@ -20,6 +20,6 @@ public class LoggerModule {
         }
     }
 
-    private class DefaultLogger implements Logging{};
+    private static class DefaultLogger implements Logging{};
 
 }

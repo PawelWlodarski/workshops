@@ -11,7 +11,7 @@ public class LoggerModuleAnswer {
     //Lab
     public static Function<Logging,Consumer<String>> createLogger = logger -> message-> logger.log(message);
 
-    public Consumer<String> defaultLogger= createLogger.apply(new DefaultLogger());
+    public static Consumer<String> defaultLogger= createLogger.apply(new DefaultLogger());
 
 
     public interface Logging{
@@ -20,6 +20,6 @@ public class LoggerModuleAnswer {
         }
     }
 
-    private class DefaultLogger implements Logging{};
+    private static class DefaultLogger implements Logging{};
 
 }

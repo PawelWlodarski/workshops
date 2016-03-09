@@ -1,6 +1,4 @@
-package workshops.functional.fp2.exercises;
-
-import workshops.functional.fp2.answers.LoggerModuleAnswer;
+package workshops.functional.fp2.answers;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,7 +10,7 @@ import java.util.function.Consumer;
 /**
  * Created by pwlodarski on 2016-03-08.
  */
-public class ImperativeLoop1 {
+public class ImperativeLoop1Answer {
 
     static Consumer<String> logger = LoggerModuleAnswer.defaultLogger;
 
@@ -29,10 +27,9 @@ public class ImperativeLoop1 {
             Map<String,Integer> counts=new HashMap<>();
 
             for (String line : lines) {
-                // ????
-                // split ","
-                // get user
-                // map compute
+                String[] fields = line.split(",");
+                String user=fields[0];
+                counts.compute(user, (k,v)-> v==null? 1 : v+1);
             }
 
             counts.entrySet().stream()
