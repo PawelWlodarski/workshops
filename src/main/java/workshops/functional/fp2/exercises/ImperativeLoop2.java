@@ -12,11 +12,22 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
- * Created by pwlodarski on 2016-03-08.
+ * Created by pwlodarski on 2016-03-09.
  */
-public class ImperativeLoop1 {
+public class ImperativeLoop2 {
 
     static Consumer<String> logger = LoggerModuleAnswer.defaultLogger;
+    //lab
+    static List<String> whichProductPurchasedTheMost(){
+        throw new UnsupportedOperationException("lab not finished");
+    }
+
+    //additional
+    static List<String> dateWhenMostProductsWasPurchased(){
+        throw new UnsupportedOperationException("lab not finished");
+    }
+
+
 
     static List<String> usersWhoPurchasedMostProducts(){
         try{
@@ -31,9 +42,9 @@ public class ImperativeLoop1 {
             Map<String,Integer> counts=new HashMap<>();
 
             for (String line : lines) {
-                // split line
-                // take user
-                // fill counts map with [user -> number of occurences]
+                String[] fields = line.split(",");
+                String user=fields[0];
+                counts.compute(user, (k,v)-> v==null? 1 : v+1);
             }
 
             return counts.entrySet().stream()
@@ -50,5 +61,4 @@ public class ImperativeLoop1 {
     public static void main(String[] args){
         usersWhoPurchasedMostProducts().forEach(logger);
     }
-
 }
