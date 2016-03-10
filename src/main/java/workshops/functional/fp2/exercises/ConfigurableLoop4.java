@@ -4,10 +4,7 @@ import workshops.functional.fp2.answers.LoggerModuleAnswer;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -44,7 +41,14 @@ public class ConfigurableLoop4 {
     static Function<Integer,Function<String,String>> extractField= index->line->line.split(",")[index];
     static Function<String,String> extractUser=extractField.apply(0);
 
+
+    //LAB
     static Function<List<String>,Map<String,Integer>> fieldsSummary = null;
+
+    //ADDITIONAL
+    static <A> Function<Collection<A>,Map<A,Integer>> createGenericFieldsSummary(){
+        throw new UnsupportedOperationException("lab not implemented");
+    }
 
     public static void main(String[] args){
         queryForMostUsages(extractUser,fieldsSummary).forEach(logger);

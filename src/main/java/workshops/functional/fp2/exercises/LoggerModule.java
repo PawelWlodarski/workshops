@@ -22,4 +22,8 @@ public class LoggerModule {
 
     private static class DefaultLogger implements Logging{};
 
+
+    //ADDITIONAL
+    //create logger with current date
+
 }

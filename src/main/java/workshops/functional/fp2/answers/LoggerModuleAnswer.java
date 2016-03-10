@@ -1,5 +1,7 @@
 package workshops.functional.fp2.answers;
 
+import java.time.Clock;
+import java.time.Instant;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -22,4 +24,19 @@ public class LoggerModuleAnswer {
 
     private static class DefaultLogger implements Logging{};
 
+    //ADDITIONAL
+
+    private static class TimeLogger implements Logging{
+
+        private Clock clock;
+
+        public TimeLogger(Clock clock) {
+            this.clock = clock;
+        }
+
+        @Override
+        public void log(String message) {
+            Logging.super.log(Instant.now(clock)+ " : " + message);
+        }
+    }
 }

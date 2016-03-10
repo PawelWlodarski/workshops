@@ -27,4 +27,22 @@ public class ConfigurableLoop3AnswerTest {
 
         assertThat(result).isEqualTo("tv");
     }
+
+    @Test
+    public void extractObjectTest() throws Exception {
+        String line="user1,tv,3000,01-02-2016";
+
+        User result = ConfigurableLoop3Answer.extractToObject(0, User::new).apply(line);
+//        ConfigurableLoop3.extractToObject(0, login -> new User(login) );
+
+        assertThat(result.login).isEqualTo("user1");
+    }
+
+    class User{
+        final String login;
+
+        User(String login) {
+            this.login = login;
+        }
+    }
 }

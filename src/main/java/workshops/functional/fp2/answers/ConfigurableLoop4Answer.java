@@ -2,10 +2,7 @@ package workshops.functional.fp2.answers;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -42,6 +39,7 @@ public class ConfigurableLoop4Answer {
     static Function<Integer,Function<String,String>> extractField= index->line->line.split(",")[index];
     static Function<String,String> extractUser=extractField.apply(0);
 
+    //Lab
     static Function<List<String>,Map<String,Integer>> fieldsSummary = fields->{
         Map<String,Integer> counts=new HashMap<>();
         for (String field : fields) {
@@ -49,6 +47,18 @@ public class ConfigurableLoop4Answer {
         }
         return counts;
     };
+
+    //ADDITIONAL
+    static <A> Function<Collection<A>,Map<A,Integer>> createGenericFieldsSummary(){
+        return elements -> {
+            Map<A,Integer> counts=new HashMap<>();
+            for (A field : elements) {
+                counts.compute(field, (k,v)-> v==null? 1 : v+1);
+            }
+            return counts;
+        };
+
+    }
 
     public static void main(String[] args){
         queryForMostUsages(extractUser,fieldsSummary).forEach(logger);

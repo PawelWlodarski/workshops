@@ -50,9 +50,14 @@ public class ConfigurableLoop3 {
     //lab
     static Function<String,String> extractUser=null;
 
-    //additional
+    //additional -- create function which extracts any field
     static Function<Integer,Function<String,String>> extractField= null;
     static Function<String,String> extractUserCreated=extractField.apply(0);
+
+    //aditional create generic extract function
+    static <A> Function<String,A> extractToObject(Integer index,Function<String,A> fieldToObject){
+        throw new UnsupportedOperationException("lab not finished");
+    }
 
     public static void main(String[] args){
 

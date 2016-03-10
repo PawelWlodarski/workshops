@@ -52,6 +52,11 @@ public class ConfigurableLoop3Answer {
     static Function<Integer,Function<String,String>> extractField= index->l->l.split(",")[index];
     static Function<String,String> extractUserCreated=extractField.apply(0);
 
+    //aditional create generic extract function
+    static <A> Function<String,A> extractToObject(Integer index,Function<String,A> fieldToObject){
+        return line -> fieldToObject.apply(line.split(",")[index]);
+    }
+
     public static void main(String[] args){
 
         queryForMostUsages(extractUser).forEach(logger);
