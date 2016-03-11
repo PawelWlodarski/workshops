@@ -52,7 +52,7 @@ public class ProcessCollection7 {
 
     static Function<Collection<String>,Collection<String>> generateUsersReport = fieldsSummary.andThen(joinSorted);
 
-    static Function<Collection<String>,Collection<String>> convertLinesToUsers =FunctionalLibraryV1.liftToCollection(extractUser);
+    static Function<Collection<String>,Collection<String>> convertLinesToUsers =FunctionalLibraryV2.liftToCollection(extractUser);
 
     //LAB
     static Function<Collection<String>,Collection<String>> removeHeader= null;

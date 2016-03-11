@@ -72,4 +72,3 @@ class FunctionalLibraryV2Answer{
         return input-> input.map(f);
     }
 }
-
