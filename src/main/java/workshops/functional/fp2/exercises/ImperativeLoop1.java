@@ -30,6 +30,7 @@ public class ImperativeLoop1 {
 
             Map<String,Integer> counts=new HashMap<>();
 
+            //LAB
             for (String line : lines) {
                 // split line
                 // take user
