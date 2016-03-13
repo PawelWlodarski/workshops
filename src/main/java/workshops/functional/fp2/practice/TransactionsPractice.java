@@ -17,7 +17,7 @@ public class TransactionsPractice {
 
         Function<Collection<String>, Collection<Tuple3<String, Integer, String>>> toTuples = null;
 
-        Function<Collection<Tuple3<String, Integer, String>>, Collection<Tuple3<String, Integer, String>>> filter001 = null
+        Function<Collection<Tuple3<String, Integer, String>>, Collection<Tuple3<String, Integer, String>>> filter001 = null;
 
         Function<Collection<Tuple3<String, Integer, String>>, Collection<Integer>> mapToTransfers = null;
 
