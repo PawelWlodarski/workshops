@@ -7,7 +7,7 @@ import org.scalatest.{FlatSpec, Matchers, PropSpec}
 /**
   * Created by pwlodarski on 2016-03-15.
   */
-class FP2TestFunctionSpec extends PropSpec with Matchers with PropertyChecks{
+class FP2TestFunction3Spec extends PropSpec with Matchers with PropertyChecks{
 
   private val fields: Gen[String] = Gen.oneOf("one","two","three","four")
 
@@ -27,7 +27,7 @@ class FP2TestFunctionSpec extends PropSpec with Matchers with PropertyChecks{
 
 }
 
-class FP2TestFunctionUnitTests extends FlatSpec with Matchers{
+class FP2TestFunction3UnitTests extends FlatSpec with Matchers{
   import FP2TestFunctions3._
 
   "Produced Predicate" should "check proper field with proper value" in {
