@@ -35,7 +35,7 @@ class FP2TestFunction3UnitTests extends FlatSpec with Matchers{
 
     val predicate: (String) => Boolean = ???
 
-    predicate(line) shouldBe(???)
+    predicate(line) shouldBe(true)
   }
 
 }
