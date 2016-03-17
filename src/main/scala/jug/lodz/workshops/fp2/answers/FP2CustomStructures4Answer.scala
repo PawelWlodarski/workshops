@@ -3,7 +3,7 @@ package jug.lodz.workshops.fp2.answers
 /**
   * Created by pwlodarski on 2016-03-16.
   */
-object FP2CustomStructuresAnswer4 {
+object FP2CustomStructures4Answer {
 
   def demonstration1(value:String)(action : String => Unit)={
     val calculationResult=s"result of some calcualtions based on '$value'"
