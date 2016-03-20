@@ -5,7 +5,8 @@ import scala.io.{BufferedSource, Source}
 /**
   * Created by pwlodarski on 2016-03-15.
   */
-object FP2LoanPattern5 {
+object
+FP2LoanPattern5 {
 
   val predicateForField : (Int,String) => String => Boolean =
     (index,expectValue)=>line=>line.split(",")(index)==expectValue

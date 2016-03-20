@@ -47,6 +47,7 @@ object FP2ConfigureFiltering2 {
     val source: BufferedSource = Source.fromURL(getClass().getResource(???))
     try {
       source.getLines()
+        //Exercise
         .filter(???)
         .foreach(println)
     } finally {
