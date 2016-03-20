@@ -55,7 +55,7 @@ public class ConfigurableLoop5 {
             throw new UnsupportedOperationException("lab not completed");
     }
 
-    class AbstractContainer<T>{
+    static class AbstractContainer<T>{
         final T t;
 
         AbstractContainer(T t) {
