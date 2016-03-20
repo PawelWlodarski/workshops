@@ -23,6 +23,7 @@ public class LoggerModuleTest {
 
         /*
         import static org.assertj.core.api.Assertions.*;
+        assertThat(loggerWithMemory.getLogs()).contains("message1","message2","message3");
          */
     }
 
