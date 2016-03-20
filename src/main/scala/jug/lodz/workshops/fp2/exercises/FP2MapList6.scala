@@ -60,10 +60,10 @@ object FP2MapList6 {
   def main(args: Array[String]) {
 
     println("------------DEMONSTRATION--------------")
-    val extractPrices=lift(extractPrice)
-    val program: (List[String]) => List[String] = processContent(generatedCsvPredicate).andThen(extractPrices)
+    val extractPrices: (List[Text]) => List[Text] =lift(extractPrice)
+    val program: (List[Text]) => List[Text] = processContent(generatedCsvPredicate).andThen(extractPrices)
 
-    val processingResult: List[String] = readFileCurried("/fpjava/purchases.csv")(program)
+    val processingResult: List[Text] = readFileCurried("/fpjava/purchases.csv")(program)
     processingResult.foreach(println)
 
     println("-----------Exercise---------------------------------")
