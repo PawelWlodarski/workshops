@@ -52,7 +52,7 @@ public class ConfigurableLoop3 {
 
     //additional -- create function which extracts any field
     static Function<Integer,Function<String,String>> extractField= null;
-    static Function<String,String> extractUserCreated=extractField.apply(0);
+    static Function<String,String> extractUserCreated=null; //extractField.apply(0);
 
     //aditional create generic extract function
     static <A> Function<String,A> extractToObject(Integer index,Function<String,A> fieldToObject){
