@@ -1,9 +1,6 @@
 package jug.lodz.workshops.fp2.answers
 
-import cats.Functor
-import jug.lodz.workshops.fp2.answers.FP2MapList6Answer._
-
-import scala.io.{Source, BufferedSource}
+import scala.io.{BufferedSource, Source}
 import scala.util.Try
 
 /**
