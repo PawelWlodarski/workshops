@@ -41,6 +41,6 @@ FP2LoanPattern5 {
   type Predicate=String=>Boolean
   lazy val processContent:Predicate=>List[String]=>List[String]= ???
 
-  val readFileCurried: (String) => ((List[String]) => List[String]) => List[String] = ???
+  lazy val readFileCurried: (String) => ((List[String]) => List[String]) => List[String] = ???
 
 }

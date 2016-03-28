@@ -15,14 +15,14 @@ object FP2ConfigureFiltering2 {
   def demonstration3(predicate:Int=>Boolean)(l:List[Int]):List[Int]= l.filter(predicate)
 
   //exercise
-  val user1Predicate:String => Boolean = ???
+  lazy val user1Predicate:String => Boolean = ???
 
   //additional
-  val predicateForField : (Int,String) => String => Boolean = ???
+  lazy val predicateForField : (Int,String) => String => Boolean = ???
 
-  val generatedCsvPredicate = predicateForField(0,"user1")
-  val generatedCsvPredicateForTV = predicateForField(1,???)
-  val generatedCsvPredicateForDate = predicateForField(???,"02-02-2016")
+  lazy val generatedCsvPredicate = predicateForField(0,"user1")
+  lazy val generatedCsvPredicateForTV = predicateForField(1,???)
+  lazy val generatedCsvPredicateForDate = predicateForField(???,"02-02-2016")
 
   def main(args: Array[String]) {
     //PREPARATION

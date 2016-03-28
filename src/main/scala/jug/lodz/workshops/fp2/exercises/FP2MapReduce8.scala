@@ -67,7 +67,7 @@ object FP2MapReduce8 {
 
   lazy val extractProduct:String => String = ???
 
-  val countOccurences: (List[String]) => Map[String, Int] = ???
+  lazy val countOccurences: (List[String]) => Map[String, Int] = ???
 
   val occurencesOfProduct = MapReduce(extractProduct)(countOccurences)
 

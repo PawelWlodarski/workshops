@@ -17,7 +17,8 @@ object FP2ReadingFile1 {
   def filter_2(l:List[Int]):List[Int]= ???
 
   //additional
-  //return tuple where first elements of a tuple are
+  //return tuple where first elements of a tuple are even
+  // and the second element of the tuple contains odd elements
   def additional(l:List[Int]): (List[Int], List[Int]) = ???
 
   def main(args: Array[String]) {
