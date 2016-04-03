@@ -8,7 +8,8 @@ import java.util.function.Function;
  */
 public class LoggerModule {
 
-    //Lab
+    //Lab - curried function Logging -> String -> Void
+    // Lab Test - implement LoggerModuleTest
     public static Function<Logging,Consumer<String>> createLogger = null;
 
     public static Consumer<String> defaultLogger= createLogger.apply(new DefaultLogger());
@@ -25,5 +26,6 @@ public class LoggerModule {
 
     //ADDITIONAL
     //create logger with current date
+    //use java.time.Clock
 
 }

@@ -16,7 +16,7 @@ public class LoggerModuleTest {
     @Test
     public void testLogging() throws Exception {
         Consumer<String> testableLogger= null;
-
+        //Lab check that all messages were stored properly in testableLogger
         testableLogger.accept("message1");
         testableLogger.accept("message2");
         testableLogger.accept("message3");

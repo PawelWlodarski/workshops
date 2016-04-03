@@ -17,12 +17,13 @@ import java.util.stream.Collectors;
 public class ImperativeLoop2 {
 
     static Consumer<String> logger = LoggerModuleAnswer.defaultLogger;
-    //lab
+
+    //lab - copy code from previous example and adapt
     static List<String> whichProductPurchasedTheMost(){
         throw new UnsupportedOperationException("lab not finished");
     }
 
-    //additional
+    //additional - also copy and adapt - is DRY rule satisfied?
     static List<String> dateWhenMostProductsWasPurchased(){
         throw new UnsupportedOperationException("lab not finished");
     }

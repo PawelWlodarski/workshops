@@ -28,5 +28,9 @@ public class ConfigurableLoop5Test {
             }};
 
         List<String> output = ConfigurableLoop5.joinSorted.apply(input);
+
+        //LAB - write assertion for output
     }
+
+    //ADDITIONAL - write tests for lift
 }

@@ -1,18 +1,10 @@
 package workshops.functional.fp2.exercises;
 
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import workshops.functional.fp2.answers.LoggerModuleAnswer;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -15,7 +15,8 @@ import java.util.stream.Collectors;
 public class ConfigurableLoop4 {
 
     static Consumer<String> logger = LoggerModuleAnswer.defaultLogger;
-
+    //now we are passing not only extracting funcion
+    //but also summary function - more parametrization and better modularisation
     static List<String> queryForMostUsages(Function<String,String> extractField, Function<List<String>,Map<String,Integer>> createSummary){
         try{
             List<String> lines= Files.readAllLines(
@@ -25,6 +26,7 @@ public class ConfigurableLoop4 {
             );
 
             lines.remove(0); //header
+            //notice that extracting field is now separated from creating summary
             List<String> fields=lines.stream().map(extractField).collect(Collectors.toList());
             Map<String,Integer> counts=createSummary.apply(fields);
             return counts.entrySet().stream()
@@ -38,14 +40,18 @@ public class ConfigurableLoop4 {
         }
     }
 
+    //LIBRARY START
+    //Extracting functions implemented in lab3
     static Function<Integer,Function<String,String>> extractField= index->line->line.split(",")[index];
     static Function<String,String> extractUser=extractField.apply(0);
+    //LIBRARY END
 
-
-    //LAB
+    //LAB - copy and refactor code from exercise 3
+    //you can use unit test ConfigurableLoop4Test to validate your solution
     static Function<List<String>,Map<String,Integer>> fieldsSummary = null;
 
     //ADDITIONAL
+    //this version allow to count occurences of any type
     static <A> Function<Collection<A>,Map<A,Integer>> createGenericFieldsSummary(){
         throw new UnsupportedOperationException("lab not implemented");
     }

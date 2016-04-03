@@ -18,45 +18,54 @@ public class ComputationFlow9 {
 
     static Consumer<String> logger = LoggerModuleAnswer.defaultLogger;
 
-    //LAB
+    //LAB - create a function which takes a path to a file and returns it's content
     static Function<String,List<String>> readLines = null;
 
     //ADDITIONAL
+    //if there is a file return Optional.of(lines) if not return Optional.empty
     static Function<String,Optional<List<String>>> safeReadLines= null;
 
-
+    //similar as above but use Try from javaslang
     static Function<String,Try<List<String>>> exceptionallySafeReadLines= null;
 
 
-    //functions - map records
+    //DOMAIN LIBRARY
+    //DATA PREPARATION PHASE - removing header
     static Function<Collection<String>,Collection<String>> removeHeader= lines->lines.stream().skip(1).collect(Collectors.toList());
 
+    //MAP PHASE
+    //Extracting functions
     static Function<Integer,Function<String,String>> extractField= index->line->line.split(",")[index];
     static Function<String,String> extractUser=extractField.apply(0);
 
+    // mapping lines to users
     static Function<Collection<String>,Collection<String>> mapLinesToUsers = FunctionalLibraryV4.liftToCollection(extractUser);
 
-    // functions - reduce to final report
+    //REDUCE PHASE
+    // general count function - to be implemented
     static Function<Collection<String>,Map<String,Integer>> numberOfOccurences = FunctionalLibraryV4.countFunction();
 
+    //sort entries
     static Function<Collection<Map.Entry<String,Integer>>,Collection<Map.Entry<String,Integer>>> naturalSort
             = FunctionalLibraryV4.sortFunction(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 
+    // produce report rows
     static Function<Collection<Map.Entry<String,Integer>>,Collection<String>> toStringRecords =
             FunctionalLibraryV4.liftToCollection(entry->entry.getKey() + ":" + entry.getValue());
 
+    // full reduce phase
     static Function<Collection<String>,Collection<String>> reduceToUsersReport =
             numberOfOccurences.andThen(m->m.entrySet()).andThen(naturalSort).andThen(toStringRecords);
 
 
-    //functions final program
+    //FINAL COMPUTATION
     static Function<Collection<String>,Collection<String>> computeSummary =
             removeHeader.andThen(mapLinesToUsers).andThen(reduceToUsersReport);
-
+    //FINAL UNSAFE PROGRAM
     static Function<String,Collection<String>> theProgram=readLines.andThen(computeSummary);
-
+    //FINAL SAFE PROGRAM WITH OPTIONAL
     static Function<String,Optional<Collection<String>>> safeProgram=path -> safeReadLines.apply(path).map(computeSummary);
-
+    //FINAL SAFE PROGRAM WITH TRY
     static Function<String,Try<Collection<String>>> exceptionallySafeProgram=
             path -> exceptionallySafeReadLines.apply(path).map(computeSummary);
 

@@ -32,9 +32,10 @@ public class ImperativeLoop1 {
 
             //LAB
             for (String line : lines) {
-                // split line
-                // take user
-                // fill counts map with [user -> number of occurences]
+                // split line on ','
+                // take user field
+                // fill counts map with [user -> number of occurences] - you may try Map.compute function
+                //map.compute takes (key, BiFunction[key,value])
             }
 
             return counts.entrySet().stream()

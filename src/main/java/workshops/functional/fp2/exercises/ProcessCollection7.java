@@ -16,6 +16,8 @@ public class ProcessCollection7 {
 
     static Consumer<String> logger = LoggerModuleAnswer.defaultLogger;
 
+    //now we have a single function which transform input state into output result
+    //also header removal is now part of computation
     static <B> Collection<B> transformFile(Function<Collection<String>,Collection<B>> computation){
         try{
             List<String> lines= Files.readAllLines(
@@ -24,7 +26,7 @@ public class ProcessCollection7 {
                     )
             );
 
-            //LAB
+            //LAB - implement execution of computation function here
             throw new UnsupportedOperationException("lab not finished");
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,10 +34,12 @@ public class ProcessCollection7 {
         }
     }
 
-    //functions
+    //DOMAIN LIBRARY START
+    //Extracting functions implemented in lab3
     static Function<Integer,Function<String,String>> extractField= index->line->line.split(",")[index];
     static Function<String,String> extractUser=extractField.apply(0);
 
+    //summary function created in lab4
     static Function<Collection<String>,Map<String,Integer>> fieldsSummary = fields->{
         Map<String,Integer> counts=new HashMap<>();
         for (String field : fields) {
@@ -44,6 +48,7 @@ public class ProcessCollection7 {
         return counts;
     };
 
+    //function which sort entries and produce report lines - defined in lab5
     static Function<Map<String,Integer>, Collection<String>> joinSorted = input ->
             input.entrySet().stream()
                     .sorted((a,b) -> b.getValue().compareTo(a.getValue()))
@@ -53,11 +58,14 @@ public class ProcessCollection7 {
 
     static Function<Collection<String>,Collection<String>> generateUsersReport = fieldsSummary.andThen(joinSorted);
 
+    //function which converts collection of lines into collection of users lab6
     static Function<Collection<String>,Collection<String>> convertLinesToUsers =FunctionalLibraryV2.liftToCollection(extractUser);
+    //DOMAIN LIBRARY END
 
-    //LAB
+    //LAB - you need to remove first line - first element in input collection.
     static Function<Collection<String>,Collection<String>> removeHeader= null;
 
+    //this is final computation composed from three independent functions
     static Function<Collection<String>,Collection<String>> computeSummary =
             removeHeader.andThen(convertLinesToUsers).andThen(generateUsersReport);
 
@@ -65,7 +73,7 @@ public class ProcessCollection7 {
         transformFile(computeSummary).forEach(logger);
     }
 }
-
+//GENERAL FUNXCTIONAL LIBRARY
 class FunctionalLibraryV2{
     public static <A,B> Function<Collection<A>,Collection<B>> liftToCollection(Function<A,B> f){
         return input -> input.stream().map(f).collect(Collectors.toList());
