@@ -157,7 +157,5 @@ object EffectsPart3MultipleOptionsAnswer {
     }
 
     def liftMaybe[A,B](f:A=>B):Maybe[A] => Maybe[B] = ma=> map(ma)(f)
-
-
   }
 }
