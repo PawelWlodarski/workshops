@@ -123,8 +123,4 @@ object EffectsPart2UnderstandOptionAnswer {
 
   }
 
-  //pattern matching
-
-  //filter
-  //lift
 }
