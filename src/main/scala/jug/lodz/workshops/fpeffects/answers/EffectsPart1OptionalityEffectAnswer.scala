@@ -67,7 +67,7 @@ object EffectsPart1OptionalityEffectAnswer {
   object Conversions{
     import FrontEnd._
     import MeetupDomain._
-    def userToHTML(u:User):HTML = s"""<a href="mailto:${u.email}">${u.name}</a></h2>"""
+    def userToHTML(u:User):HTML = s"""<a href="mailto:${u.email}">${u.name}</a>"""
   }
 
   object FrontEnd{
