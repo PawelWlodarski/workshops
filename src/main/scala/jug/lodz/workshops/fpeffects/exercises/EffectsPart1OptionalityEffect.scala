@@ -64,7 +64,7 @@ object EffectsPart1OptionalityEffect {
     @throws(classOf[Exception])
     def findOrException(id: Int): User = if (database.contains(id)) database(id) else throw new RuntimeException("break computation!")
     def findOrDefault(id: Int, defaultUser: User): User = if (database.contains(id)) database(id) else defaultUser
-    //i co jest default?
+    //what is default here?
     def findOption(id: Int): Option[User] = database.get(id)
   }
 
