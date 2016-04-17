@@ -8,14 +8,14 @@ import scala.util.{Success, Failure, Try}
   */
 object EffectsPart5ErrorEffectAnswer {
 
-  object Demonstration{
+  object Demonstration {
 
-    def demonstrate()={
+    def demonstrate() = {
       println("DEMONSTRATE")
       println("[TRY] Reading File")
 
-      val goodPath="/fpjava/purchases.csv"
-      val badPath="notExisting.csv"
+      val goodPath = "/fpjava/purchases.csv"
+      val badPath = "notExisting.csv"
       val goodResult: Try[List[String]] = readLines(goodPath)
       val badResult: Try[List[String]] = readLines(badPath)
 
@@ -25,32 +25,32 @@ object EffectsPart5ErrorEffectAnswer {
 
 
       println(" \n -- Recover Good")
-      goodResult.recover{
-        case e:Throwable => List(s"something went wrong  : [${e.getMessage}]")
+      goodResult.recover {
+        case e: Throwable => List(s"something went wrong  : [${e.getMessage}]")
       }.get.foreach(println)
 
       println(" \n -- Recover Bad")
-      badResult.recover{
-        case e:Exception =>  List(s"something went wrong  : [${e.getMessage}]")
+      badResult.recover {
+        case e: Exception => List(s"something went wrong  : [${e.getMessage}]")
       }.get.foreach(println)
 
       println(s"\n  -- transform Good")
-      val businessFunction:List[String] => Try[Int] = l=> Try(l.length)
-      val errorHandler : Throwable => Try[Int] = _ => Try(0)
-      goodResult.transform(businessFunction,errorHandler).map(i=>s"file length $i").foreach(println)
+      val businessFunction: List[String] => Try[Int] = l => Try(l.length)
+      val errorHandler: Throwable => Try[Int] = _ => Try(0)
+      goodResult.transform(businessFunction, errorHandler).map(i => s"file length $i").foreach(println)
 
       println(s"\n  -- transform Bad")
-      badResult.transform(businessFunction,errorHandler).map(i=>s"file length $i").foreach(println)
+      badResult.transform(businessFunction, errorHandler).map(i => s"file length $i").foreach(println)
 
       println(s"\n  -- pattern matching")
       goodResult match {
-        case Success(lines) => println(s"file size PM : "+lines.size)
+        case Success(lines) => println(s"file size PM : " + lines.size)
         case Failure(exception) => throw exception
       }
     }
 
-    def readLines(path:String):Try[List[String]]= Try{
-      Option(getClass().getResource(path)).map{r=>
+    def readLines(path: String): Try[List[String]] = Try {
+      Option(getClass().getResource(path)).map { r =>
         val source = Source.fromURL(r)
         source.getLines().toList
       }.getOrElse(throw new RuntimeException(s"there is no file under path : $path"))
@@ -58,38 +58,39 @@ object EffectsPart5ErrorEffectAnswer {
     }
 
   }
-    object Exercise {
-      def stringToInt(s: String): Try[Int] = Try(s.toInt)
-      def tryToAdd(s1: String, s2: String, s3: String, s4: String) = for {
-        i1 <- stringToInt(s1)
-        i2 <- stringToInt(s2)
-        i3 <- stringToInt(s3)
-        i4 <- stringToInt(s4)
-      } yield (i1 + i2 + i3 + i4)
 
-    }
+  object Exercise {
+    def stringToInt(s: String): Try[Int] = Try(s.toInt)
+    def tryToAdd(s1: String, s2: String, s3: String, s4: String) = for {
+      i1 <- stringToInt(s1)
+      i2 <- stringToInt(s2)
+      i3 <- stringToInt(s3)
+      i4 <- stringToInt(s4)
+    } yield (i1 + i2 + i3 + i4)
+
+  }
 
   def main(args: Array[String]) {
     Demonstration.demonstrate()
 
     import Exercise._
     println("\n\n   ---- EXERCISES ----  ")
-    println(tryToAdd("1","2","3","4")==Try(10))
-    println(tryToAdd("1","2","♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪","4").isFailure==true)
+    println(tryToAdd("1", "2", "3", "4") == Try(10))
+    println(tryToAdd("1", "2", "♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪", "4").isFailure == true)
 
 
     println("\n\n   ---- ADDITIONAL ----  ")
     import EffectsLibrary._
-    println(map2(Try(1),Try(2))(_+_)==Try(3))
-    println(sequence(List(Try(1),Try(2),Try(3)))==Try(List(1,2,3)))
-    println(map3(Just(5),Just(5),Just(5))(_+_+_)==Just(15))
+    println(map2(Try(1), Try(2))(_ + _) == Try(3))
+    println(sequence(List(Try(1), Try(2), Try(3))) == Try(List(1, 2, 3)))
+    println(map3(Just(5), Just(5), Just(5))(_ + _ + _) == Just(15))
   }
 
 
   object EffectsLibrary {
 
     //ADDITIONAL
-    def map2[A,B,C](t1:Try[A],t2:Try[B])(f:(A,B)=>C):Try[C] =for {
+    def map2[A, B, C](t1: Try[A], t2: Try[B])(f: (A, B) => C): Try[C] = for {
       a <- t1
       b <- t2
     } yield f(a, b)
@@ -106,7 +107,7 @@ object EffectsPart5ErrorEffectAnswer {
       l.foldRight[Try[List[A]]](Try(List.empty[A]))((a, b) => map2(a, b)((a, b) => a :: b))
 
 
-    def map3[A, B, C,D](m1: Maybe[A], m2: Maybe[B],m3:Maybe[C])(f: (A, B,C) => D): Maybe[D] = for {
+    def map3[A, B, C, D](m1: Maybe[A], m2: Maybe[B], m3: Maybe[C])(f: (A, B, C) => D): Maybe[D] = for {
       a <- m1
       b <- m2
       c <- m3
@@ -126,6 +127,7 @@ object EffectsPart5ErrorEffectAnswer {
     }
 
     case class Just[A](value: A) extends Maybe[A]
+
     case object Empty extends Maybe[Nothing]
 
 
