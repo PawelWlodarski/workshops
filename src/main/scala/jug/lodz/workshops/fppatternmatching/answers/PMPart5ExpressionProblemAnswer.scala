@@ -108,7 +108,7 @@ object PMPart5ExpressionProblemAnswer {
 
   }
 
-  object ExerciseLevelMonad {
+  object ExerciseLevelBoss {
 
     sealed trait RightBiasedEither[+A, +B] {
       def map[C](f: B => C): RightBiasedEither[A, C] = this match {
@@ -153,7 +153,7 @@ object PMPart5ExpressionProblemAnswer {
     println("[------EXERCISES------]")
     println("\n[------EXERCISE LEVEL MONAD------]")
 
-    ExerciseLevelMonad.exercise()
+    ExerciseLevelBoss.exercise()
   }
 
 }
