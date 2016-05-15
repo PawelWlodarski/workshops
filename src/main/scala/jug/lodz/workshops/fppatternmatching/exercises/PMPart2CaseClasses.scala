@@ -177,12 +177,12 @@ object PMPart2CaseClasses {
 
   /**
     * Bigger example - implementing server
+    * x - set of METHODS is limited
+    * x - set of HEADERS is limited
     */
   object ExerciseLevel3 {
 
     case class Header(name: String, value: String)
-
-    case class Method(name: String)
 
     case class Request[A](url: String, method: String, headers: List[Header], body: A)
 
@@ -198,23 +198,27 @@ object PMPart2CaseClasses {
 
     def exercise31() = {
       def getServer[A, B](request: Request[A]): Response[String] = request match {
-        case Request(url, method, _, _) if (method == ???) => ??? // handle GET case
+        case Request(url, method, _, _) if (method == ???) => web.get(url)
+          .map(page => Response(???, page.content))
+          .getOrElse(Response(???, "Not_Found :(")) // handle GET case
 
-        case Request(_, _, _, _) => ??? //handle other methods POST,PUT etc.
+        case Request(_, _, _, _) => Response(???, "only GET allowed") //handle other methods POST,PUT etc.
 
-        case _ => ??? //handle unexpected requests
+        case _ => Response(???, "What is this?") //handle unexpected requests
       }
 
-      check("EXERCISE31 correct request : ")(getServer(Request("www.juglodz.pl", "GET", List(), "")).code,200)
-      check("EXERCISE31 - wrong url: ")(getServer(Request("www.jglodz.pl", "GET", List(), "")).code , 404)
-      check("EXERCISE31 - wrong method: ")(getServer(Request("www.juglodz.pl", "POST", List(), "")).code , 405)
+      check("EXERCISE31 - for case 'correct request' : ")(getServer(Request("www.juglodz.pl", "GET", List(), "")).code,200)
+      check("EXERCISE31 - for case 'wrong url': ")(getServer(Request("www.jglodz.pl", "GET", List(), "")).code , 404)
+      check("EXERCISE31 - for case 'wrong method': ")(getServer(Request("www.juglodz.pl", "POST", List(), "")).code , 405)
       val hack: Null = null
       check("EXERCISE31 - hacked:")(getServer(hack).code , 501)
 
 
     }
     def exercise32() = {
-      def converter[A, B](ra: Request[A])(f: A => B): Request[B] = ??? //convert request body
+      def converter[A, B](ra: Request[A])(f: A => B): Request[B] = ra match {
+        case Request(url, method, headers, body) => Request(url, method, headers, ???)
+      } //convert request body
 
       case class JsonString(value: String)
       case class Json(content: JsonString)
