@@ -3,12 +3,27 @@ package jug.lodz.workshops.fppatternmatching.exercises
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
+import jug.lodz.workshops.Workshops
+import jug.lodz.workshops.Workshops.check
+
 import scala.collection.mutable.ListBuffer
 
 /**
   * Created by pawel on 24.04.16.
   */
 object PMPart4Decomposition {
+
+  def main(args: Array[String]) {
+    Demonstration.demo()
+
+    //    println("[------EXERCISES------]")
+    //    println("\n[------EXERCISE LEVEL 1------]")
+    //    ExerciseLevel1.exercise11()
+    //    ExerciseLevel1.exercise12()
+    //
+    //    println("\n[------EXERCISE LEVEL 2------]")
+    //    ExerciseLevel2.exercise21()
+  }
 
   object Demonstration {
     def demo() = {
@@ -32,10 +47,10 @@ object PMPart4Decomposition {
         def apply(s: String) = new Wrapper3(s)
         def unapply(w3: Wrapper3): Option[String] = Some(w3.value)
       }
-
-      Wrapper3("  --> example3 is working!") match {
-        case Wrapper3(value) => println(value)
-      }
+// KATA
+//      Wrapper3("  --> example3 is working!") match {
+//        case Wrapper3(value) => println(value)
+//      }
 
       println("\n* EXAMPLE4 : STATE ENCAPSULATION")
       class ObjectWithState() {
@@ -47,23 +62,23 @@ object PMPart4Decomposition {
         def unapply(state: ObjectWithState): Option[(String, Int)] =
           state.history.headOption.map(lastMessage => (lastMessage, state.history.size))
       }
-
-      val state = new ObjectWithState()
-      state.act("message1")
-      state.act("message2")
-      state.act("message3")
-
-      state match {
-        case ObjectWithState(lastMessage, allMessagesSize) =>
-          println(s"  --> last message is : $lastMessage and there are $allMessagesSize messages")
-      }
-
-      val state2 = new ObjectWithState()
-      state2 match {
-        case ObjectWithState(lastMessage, allMessagesSize) =>
-          println(s"  -->last message is : $lastMessage and there are $allMessagesSize messages")
-        case _ => println("  --> state2 is empty")
-      }
+// KATA
+//      val state = new ObjectWithState()
+//      state.act("message1")
+//      state.act("message2")
+//      state.act("message3")
+//
+//      state match {
+//        case ObjectWithState(lastMessage, allMessagesSize) =>
+//          println(s"  --> last message is : $lastMessage and there are $allMessagesSize messages")
+//      }
+//
+//      val state2 = new ObjectWithState()
+//      state2 match {
+//        case ObjectWithState(lastMessage, allMessagesSize) =>
+//          println(s"  -->last message is : $lastMessage and there are $allMessagesSize messages")
+//        case _ => println("  --> state2 is empty")
+//      }
     }
   }
 
@@ -71,16 +86,18 @@ object PMPart4Decomposition {
 
     class SimpleClass(val parameter: Int)
 
+    // extract parameter from simple class
     object SimpleClass {
       def unapply(sc: SimpleClass): Option[Int] = ???
     }
 
     def exercise11() = {
       new SimpleClass(20) match {
-        case SimpleClass(value) => println(s" *EXERCISE11 : ${value == 20}")
+        case SimpleClass(value) => check("EXERCISE11")(value , 20)
       }
     }
 
+    // implement Fraction-to-string with PM
     class Fraction(val c:Int, val d:Int)
     object Fraction{
       def unapply(f:Fraction):Option[(Int,Int)] = ???
@@ -92,13 +109,18 @@ object PMPart4Decomposition {
     }
 
     def exercise12()={
-        println(s""" *EXERCISE12 :  ${matchFraction(new Fraction(5,1))=="5"} """)
-        println(s""" *EXERCISE12 :  ${matchFraction(new Fraction(-5,1))=="-5"} """)
-        println(s""" *EXERCISE12 :  ${matchFraction(new Fraction(5,2))=="5/2"} """)
-        println(s""" *EXERCISE12 :  ${matchFraction(new Fraction(-5,2))=="-5/2"} """)
+        val check12=check("EXERCISE12") _
+        check12(matchFraction(new Fraction(5,1)),"5")
+        check12(matchFraction(new Fraction(-5,1)),"-5")
+        check12(matchFraction(new Fraction(5,2)),"5/2")
+        check12(matchFraction(new Fraction(-5,2)),"-5/2")
     }
   }
 
+  /**
+    * x - encapsulate state
+    * x - CAS and multithreading
+    */
   object ExerciseLevel2 {
     class Counter{
       private val state:AtomicInteger=new AtomicInteger()
@@ -120,21 +142,11 @@ object PMPart4Decomposition {
       TimeUnit.MILLISECONDS.sleep(100)
 
       globalCounter match {
-        case Counter(value) => println(s" *EXERCISE21 : ${value==50}")
+        case Counter(value) => check("EXERCISE21")(value,50)
       }
     }
   }
 
-  def main(args: Array[String]) {
-    Demonstration.demo()
 
-//    println("[------EXERCISES------]")
-//    println("\n[------EXERCISE LEVEL 1------]")
-//    ExerciseLevel1.exercise11()
-//    ExerciseLevel1.exercise12()
-//
-//    println("\n[------EXERCISE LEVEL 2------]")
-//    ExerciseLevel2.exercise21()
-  }
 
 }
