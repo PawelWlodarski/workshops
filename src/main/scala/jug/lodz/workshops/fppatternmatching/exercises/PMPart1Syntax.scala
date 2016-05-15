@@ -87,7 +87,7 @@ object PMPart1Syntax {
         case _ => 100
       }
 
-      check("EXERCISE11",result1,3)
+      check("EXERCISE11")(result1,3)
     }
     // x - mapping on lists
     // x - use guards
@@ -101,7 +101,7 @@ object PMPart1Syntax {
       }
 
       val result2 = List(1, 2, 3, 4, 5).map(matchOnelement) //map will apply matchOneElement function on each element
-      check("EXERCISE12",result2,List("odd", "even", "odd", "even", "odd"))
+      check("EXERCISE12")(result2,List("odd", "even", "odd", "even", "odd"))
     }
   }
 
@@ -114,9 +114,10 @@ object PMPart1Syntax {
         case head :: tail => ???
       }
 
-      check("EXERCISE21",firstElementOrZero(List(1, 2, 3)),1)
-      check("EXERCISE21",firstElementOrZero(List(2, 3)),2)
-      check("EXERCISE21",firstElementOrZero(List()),0)
+      val check21=check("EXERCISE21")
+      check21(firstElementOrZero(List(1, 2, 3)),1)
+      check21(firstElementOrZero(List(2, 3)),2)
+      check21(firstElementOrZero(List()),0)
     }
 
 
@@ -124,9 +125,10 @@ object PMPart1Syntax {
       //reverts the list only if it has three elements
       def revertListIfSizeThree[A](l: List[A]): List[A] = ???
 
-      check("EXERCISE22",revertListIfSizeThree(List(1, 2, 3)),List(3, 2, 1))
-      check("EXERCISE22",revertListIfSizeThree(List('a', 'b', 'c')),List('a', 'b', 'c'))
-      check("EXERCISE22",revertListIfSizeThree(List(1, 2, 3, 4)),List(1, 2, 3, 4))
+      val check22=check("EXERCISE22")
+      check22(revertListIfSizeThree(List(1, 2, 3)),List(3, 2, 1))
+      check22(revertListIfSizeThree(List('a', 'b', 'c')),List('a', 'b', 'c'))
+      check22(revertListIfSizeThree(List(1, 2, 3, 4)),List(1, 2, 3, 4))
     }
 
 
@@ -135,9 +137,10 @@ object PMPart1Syntax {
         //use recursion to calculate size of the list
         def size[A](list: List[A]): Int = ???
 
-        check("EXERCISE31",size(List(1, 2, 3)),3)
-        check("EXERCISE31",size(List(1, 2, 3, 3, 3)),5)
-        check("EXERCISE31",size(List('a', 'b')),2)
+        val check31=check("EXERCISE31")
+        check31(size(List(1, 2, 3)),3)
+        check31(size(List(1, 2, 3, 3, 3)),5)
+        check31(size(List('a', 'b')),2)
 
       }
 
@@ -148,9 +151,10 @@ object PMPart1Syntax {
         //@tailrec
         def lastElement[A](list: List[A]): Option[A] = ???
 
-        check("EXERCISE32",lastElement(List(1, 2, 3)),Some(3))
-        check("EXERCISE32",lastElement(List(1, 2, 5, 7, 88, 7)),Some(7))
-        check("EXERCISE32",lastElement(List()),None)
+        val check32=check("EXERCISE32")
+        check32(lastElement(List(1, 2, 3)),Some(3))
+        check32(lastElement(List(1, 2, 5, 7, 88, 7)),Some(7))
+        check32(lastElement(List()),None)
       }
     }
 
