@@ -104,6 +104,9 @@ object PMPart1Syntax {
     }
   }
 
+  /**
+    * Learning points - working with lists
+   */
   object ExerciseLevel2 {
     // get first element of list or zero if list is empty
     def exercise21() = {
@@ -135,6 +138,10 @@ object PMPart1Syntax {
 
   }
 
+
+  /**
+    * x pattern matchign and recursion
+    */
   object ExerciseLevel3 {
     def exercise31() = {
       //use recursion to calculate size of the list

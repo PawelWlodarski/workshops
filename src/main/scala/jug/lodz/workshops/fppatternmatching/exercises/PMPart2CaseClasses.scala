@@ -1,10 +1,32 @@
 package jug.lodz.workshops.fppatternmatching.exercises
 
+import jug.lodz.workshops.Workshops
+import jug.lodz.workshops.Workshops.check
+
 /**
   * Created by pawel on 22.04.16.
   */
 object PMPart2CaseClasses {
 
+
+  def main(args: Array[String]) {
+    Demonstration.demo()
+
+    //    println("\n\n[------EXERCISES------]")
+    //    println("\n[------EXERCISE LEVEL 1------]")
+    //    ExerciseLevel1.exercise11()
+    //    ExerciseLevel1.exercise12()
+    //
+    //    println("\n[------EXERCISE LEVEL 2------]")
+    //    ExerciseLevel2.exercise21()
+    //    ExerciseLevel2.exercise22()
+    //    ExerciseLevel2.exercise23()
+    //
+    //
+    //    println("\n[------EXERCISE LEVEL 3------]")
+    //    ExerciseLevel3.exercise31()
+    //    ExerciseLevel3.exercise32()
+  }
 
   object Demonstration {
 
@@ -15,18 +37,18 @@ object PMPart2CaseClasses {
       println("\n *[Matching Simple Case Classes]")
       val record = SomeClass("someValue")
 
-      record match {
-        case SomeClass("someValue") => println("  --> exact match : case SomeClass(\"someValue\")")
-      }
-
-      record match {
-        case SomeClass(value) => println(s"  --> value match $value : SomeClass(value)")
-      }
-
-      record match {
-        case c@SomeClass(value) => println(s"  --> full class match $c :  c @ SomeClass(value)")
-
-      }
+//      record match {
+//        case SomeClass("someValue") => println("  --> exact match : case SomeClass(\"someValue\")")
+//      }
+//
+//      record match {
+//        case SomeClass(value) => println(s"  --> value match $value : SomeClass(value)")
+//      }
+//
+//      record match {
+//        case c@SomeClass(value) => println(s"  --> full class match $c :  c @ SomeClass(value)")
+//
+//      }
 
       println("\n *[Matching Embedded Case Classes]")
       case class City(name: String)
@@ -36,9 +58,9 @@ object PMPart2CaseClasses {
       val city = City("Lodz")
       val user = User("John", Address("Piotrkowska", city))
 
-      user match {
-        case User(userName, Address(_, City(cityName))) => println(s"  --> user $userName lives in $cityName")
-      }
+//      user match {
+//        case User(userName, Address(_, City(cityName))) => println(s"  --> user $userName lives in $cityName")
+//      }
 
 
       println("\n *[Matching Case Classes List]")
@@ -46,21 +68,25 @@ object PMPart2CaseClasses {
       val user2 = User("Jane", Address("Przybyszewskiego", city2))
       val users = List(user, user2)
 
-      users match {
-        case User(_, Address(_, City(city1))) :: User(_, Address(_, City(city2))) :: Nil =>
-          println(s"  --> there are two cities : [$city1,$city2]")
-      }
-
-      println("\n *[Matching In Partial Functions]")
-      val names = users.map {
-        case User(name, _) => name
-      }
-      println(s"  --> user names $names")
+//      users match {
+//        case User(_, Address(_, City(city1))) :: User(_, Address(_, City(city2))) :: Nil =>
+//          println(s"  --> there are two cities : [$city1,$city2]")
+//      }
+//
+//      println("\n *[Matching In Partial Functions]")
+//      val names = users.map {
+//        case User(name, _) => name
+//      }
+//      println(s"  --> user names $names")
     }
 
 
   }
 
+  /**
+    * Learning points
+    *  x extract values from cases classes
+    */
   object ExerciseLevel1 {
 
     case class Wrapper(value: String)
@@ -70,7 +96,7 @@ object PMPart2CaseClasses {
         case _ => ??? // modify case to extract value from wrapper
       }
 
-      println(s""" *EXERCISE11 : ${result1 == "value1"}""") // result1 should be "value1"
+      check("EXERCISE11")(result1,"value1") // result1 should be "value1"
     }
 
     def exercise12() = {
@@ -78,11 +104,15 @@ object PMPart2CaseClasses {
         case _ => ??? //modify case to transform List[wrapper] into List[String](v1,v2)
       }
 
-      println(s""" *EXERCISE12 : ${result2 == List("v1", "v2")}""") //result2 should be a List(v1,v2)
+      check("EXERCISE12")(result2,List("v1", "v2")) //result2 should be a List(v1,v2)
     }
 
   }
 
+  /**
+    * Learning points
+    * x - transforming collections with pattern matching
+    */
   object ExerciseLevel2 {
 
     case class Price(value: BigDecimal)
@@ -111,12 +141,13 @@ object PMPart2CaseClasses {
 
     val purchases = List(purchase1, purchase2)
 
+    // extract dates from purchases
     def exercise21() = {
       def extractDates(ps: List[Purchase]): List[String] = ps.map {
         ???
       } //check  "Matching In Partial Functions" from demonstration
 
-      println(s" *EXERCISE21 : ${extractDates(purchases) == List("20-04-2016", "21-03-2016")}")
+      check("EXERCISE21")(extractDates(purchases), List("20-04-2016", "21-03-2016"))
     }
 
     def exercise22() = {
@@ -126,7 +157,7 @@ object PMPart2CaseClasses {
         case Purchase(_, items) => items.map(extractPrice).sum
       }
 
-      println(s" *EXERCISE22 : ${sumPrices(purchases) == List(BigDecimal(560), BigDecimal(150))}")
+      check("EXERCISE22")(sumPrices(purchases),List(BigDecimal(560), BigDecimal(150)))
     }
 
     def exercise23() = {
@@ -136,14 +167,17 @@ object PMPart2CaseClasses {
         case Purchase(date, items) => ??? //map to List of tuples (date, sumofPrices)
       }
 
-      println(s" *EXERCISE23 : ${
-        pricesInfo(purchases) == List(
+      check("EXERCISE23")(pricesInfo(purchases),List(
           ("20-04-2016", BigDecimal(560)),
-          ("21-03-2016", BigDecimal(150)))
-      }")
+          ("21-03-2016", BigDecimal(150))
+      ))
+
     }
   }
 
+  /**
+    * Bigger example - implementing server
+    */
   object ExerciseLevel3 {
 
     case class Header(name: String, value: String)
@@ -157,7 +191,7 @@ object PMPart2CaseClasses {
     case class Page(content: String)
 
     val web: Map[String, Page] = Map(
-      "www.juglodz.pl" -> Page("<h1>This is jug page</h1>"),
+      "www.juglodz.pl" -> Page("<h1>This is the jug page</h1>"),
       "www.google.com" -> Page("<input>Enter phrase</input>")
     )
 
@@ -171,11 +205,11 @@ object PMPart2CaseClasses {
         case _ => ??? //handle unexpected requests
       }
 
-      println(s""" *EXERCISE31 - correct request: ${getServer(Request("www.juglodz.pl", "GET", List(), "")).code == 200}""")
-      println(s""" *EXERCISE31 - wrong url: ${getServer(Request("www.jglodz.pl", "GET", List(), "")).code == 404}""")
-      println(s""" *EXERCISE31 - wrong method: ${getServer(Request("www.juglodz.pl", "POST", List(), "")).code == 405}""")
+      check("EXERCISE31 correct request : ")(getServer(Request("www.juglodz.pl", "GET", List(), "")).code,200)
+      check("EXERCISE31 - wrong url: ")(getServer(Request("www.jglodz.pl", "GET", List(), "")).code , 404)
+      check("EXERCISE31 - wrong method: ")(getServer(Request("www.juglodz.pl", "POST", List(), "")).code , 405)
       val hack: Null = null
-      println(s""" *EXERCISE31 - hacked: ${getServer(hack).code == 501}""")
+      check("EXERCISE31 - hacked:")(getServer(hack).code , 501)
 
 
     }
@@ -192,28 +226,11 @@ object PMPart2CaseClasses {
       )
 
       val resultRequest = converter(jsonRequest) { case Json(JsonString(value)) => value }
-      println(s""" *EXERCISE32 : ${resultRequest.body == "requestBody"}""")
+      check("EXERCISE32")(resultRequest.body,"requestBody")
 
     }
   }
 
-  def main(args: Array[String]) {
-    Demonstration.demo()
 
-    //    println("\n\n[------EXERCISES------]")
-    //    println("\n[------EXERCISE LEVEL 1------]")
-    //    ExerciseLevel1.exercise11()
-    //    ExerciseLevel1.exercise12()
-    //
-    //    println("\n[------EXERCISE LEVEL 2------]")
-    //    ExerciseLevel2.exercise21()
-    //    ExerciseLevel2.exercise22()
-    //    ExerciseLevel2.exercise23()
-    //
-    //
-    //    println("\n[------EXERCISE LEVEL 3------]")
-    //    ExerciseLevel3.exercise31()
-    //    ExerciseLevel3.exercise32()
-  }
 }
 
