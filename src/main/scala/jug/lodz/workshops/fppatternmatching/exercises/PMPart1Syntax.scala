@@ -2,7 +2,6 @@ package jug.lodz.workshops.fppatternmatching.exercises
 
 import jug.lodz.workshops.Workshops
 import jug.lodz.workshops.Workshops.check
-import jug.lodz.workshops.fppatternmatching.answers.PMPart1SyntaxAnswer.ExerciseLevel2.ExerciseLevel3
 
 import scala.annotation.tailrec
 
@@ -132,34 +131,33 @@ object PMPart1Syntax {
     }
 
 
-    object ExerciseLevel3 {
-      def exercise31() = {
-        //use recursion to calculate size of the list
-        def size[A](list: List[A]): Int = ???
 
-        val check31=check("EXERCISE31") _
-        check31(size(List(1, 2, 3)),3)
-        check31(size(List(1, 2, 3, 3, 3)),5)
-        check31(size(List('a', 'b')),2)
-
-      }
-
-      def exercise32() = {
-        //return last element of the list - USE PATTERN MATCHING
-        //return Some(x) if list is not empty
-        //return None if list is empty
-        //@tailrec
-        def lastElement[A](list: List[A]): Option[A] = ???
-
-        val check32=check("EXERCISE32") _
-        check32(lastElement(List(1, 2, 3)),Some(3))
-        check32(lastElement(List(1, 2, 5, 7, 88, 7)),Some(7))
-        check32(lastElement(List()),None)
-      }
-    }
 
   }
 
+  object ExerciseLevel3 {
+    def exercise31() = {
+      //use recursion to calculate size of the list
+      def size[A](list: List[A]): Int = ???
 
+      val check31=check("EXERCISE31") _
+      check31(size(List(1, 2, 3)),3)
+      check31(size(List(1, 2, 3, 3, 3)),5)
+      check31(size(List('a', 'b')),2)
 
+    }
+
+    def exercise32() = {
+      //return last element of the list - USE PATTERN MATCHING
+      //return Some(x) if list is not empty
+      //return None if list is empty
+      //@tailrec
+      def lastElement[A](list: List[A]): Option[A] = ???
+
+      val check32=check("EXERCISE32") _
+      check32(lastElement(List(1, 2, 3)),Some(3))
+      check32(lastElement(List(1, 2, 5, 7, 88, 7)),Some(7))
+      check32(lastElement(List()),None)
+    }
+  }
 }
