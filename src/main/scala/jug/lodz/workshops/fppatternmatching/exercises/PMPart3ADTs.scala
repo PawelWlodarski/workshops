@@ -1,11 +1,32 @@
 package jug.lodz.workshops.fppatternmatching.exercises
 
+import jug.lodz.workshops.Workshops
+import jug.lodz.workshops.Workshops.check
+
 import scala.util.{Failure, Success, Try}
 
 /**
   * Created by pawel on 23.04.16.
   */
 object PMPart3ADTs {
+
+  def main(args: Array[String]) {
+    Demonstration.demo()
+
+    //    println("[------EXERCISES------]")
+    //    println("\n[------EXERCISE LEVEL 1------]")
+    //    ExerciseLevel1.exercise11()
+    //
+    //    println("\n[------EXERCISE LEVEL 2------]")
+    //    ExerciseLevel2.exercise21()
+    //    ExerciseLevel2.exercise22()
+    //
+    //    println("\n[------EXERCISE LEVEL 3------]")
+    //    ExerciseLevel3.exercise31()
+    //
+    //    println("\n[------EXERCISE LEVEL 4 :  BOSS------]")
+    //    ExerciseLevel4.exercise41()
+  }
 
   sealed trait BOOLEAN
 
@@ -33,6 +54,7 @@ object PMPart3ADTs {
       println("\n\n *HOW TO IMPLEMENT ADT")
       println("\n * 1) WHAT IS TRAIT")
 
+      //show how trait is working
       trait SomeTrait {
         def someMethod: String
       }
@@ -41,8 +63,8 @@ object PMPart3ADTs {
         override def someMethod: String = "someMethod concrete implementation"
       }
 
-      val traitImplementation: SomeTrait = new SomeClass()
-      println(s"  --> executing overriden method : '${traitImplementation.someMethod}'")
+//      val traitImplementation: SomeTrait = new SomeClass()
+//      println(s"  --> executing overriden method : '${traitImplementation.someMethod}'")
 
       println("\n * 2) HOW TO LIMIT NUMBER OF POSSIBLE VALUES? 'SEALED' word")
       //already defined in the main object scope
@@ -53,10 +75,10 @@ object PMPart3ADTs {
       println("\n * 3) Now it's easy to detect if your functions are TOTAL or PARTIAL")
 
       object BooleanAlgebra {
-        def negateTotalFunction(b: BOOLEAN): BOOLEAN = b match {
-          case TRUE() => FALSE()
-          case FALSE() => TRUE()
-        }
+//        def negateTotalFunction(b: BOOLEAN): BOOLEAN = b match {
+//          case TRUE() => FALSE()
+//          case FALSE() => TRUE()
+//        }
 
         //uncomment
         //        def negatePartialFunction(b:BOOLEAN):BOOLEAN=b match {
@@ -64,13 +86,16 @@ object PMPart3ADTs {
         //        }
       }
 
-      println("  --> negate true : " + BooleanAlgebra.negateTotalFunction(TRUE()))
-      println("  --> negate false : " + BooleanAlgebra.negateTotalFunction(FALSE()))
+//      println("  --> negate true : " + BooleanAlgebra.negateTotalFunction(TRUE()))
+//      println("  --> negate false : " + BooleanAlgebra.negateTotalFunction(FALSE()))
 
     }
 
   }
 
+  /**
+  * x implement boolean algebra
+   */
   object ExerciseLevel1 {
     def exercise11() = {
       def and(a: BOOLEAN, b: BOOLEAN): BOOLEAN = (a, b) match {
@@ -80,7 +105,7 @@ object PMPart3ADTs {
       def or(a: BOOLEAN, b: BOOLEAN): BOOLEAN = (a, b) match {
         case _ => ???   //handle all 4 possibilities
       }
-
+      //Check without assertions
       println(s" *EXERCISE11 t&&t: ${and(TRUE(), TRUE())}")
       println(s" *EXERCISE11 t&&f: ${and(TRUE(), FALSE())}")
       println(s" *EXERCISE11 f&&t: ${and(FALSE(), TRUE())}")
@@ -96,6 +121,8 @@ object PMPart3ADTs {
   }
 
   object ExerciseLevel2 {
+
+    //Match on Try - scala.util.Success, scala.util.Failure
     def exercise21() = {
       def parse(l: List[String]): List[Try[Int]] = l.map(s => Try(s.toInt))
       def tryToNumber(default: Int)(l: List[Try[Int]]): List[Int] = l.map {
@@ -105,12 +132,15 @@ object PMPart3ADTs {
 
       val parsed = parse(List("1", "2", "aa", "5", "ccc"))
 
-      println(s" *EXERCISE21 ${tryToNumber(0)(parsed) == List(1, 2, 0, 5, 0)}")
-      println(s" *EXERCISE21 ${tryToNumber(1)(parsed) == List(1, 2, 1, 5, 1)}")
+      check("EXERCISE21")(tryToNumber(0)(parsed), List(1, 2, 0, 5, 0))
+      check("EXERCISE21")(tryToNumber(1)(parsed), List(1, 2, 1, 5, 1))
 
     }
 
+
     def exercise22() = {
+
+      //implement without recursion
       def sizeListAsADT[A](l: List[A]): Int = l match {
         case Nil => 0
         case ::(_, Nil) => 1
@@ -118,16 +148,23 @@ object PMPart3ADTs {
         case _ => throw new RuntimeException("don't know how to handle this case")
       }
 
-      println(s" *EXERCISE22 : ${sizeListAsADT(List()) == 0}")
-      println(s" *EXERCISE22 : ${sizeListAsADT(List(1)) == 1}")
-      println(s" *EXERCISE22 : ${sizeListAsADT(List(1, 2)) == 2}")
-      println(s" *EXERCISE22 : ${sizeListAsADT(List(1, 2, 3)) == 3}")
-      println(s" *EXERCISE22 : ${sizeListAsADT(List(1, 2, 3, 4)) == 4}")
+      val check22=check("EXERCISE22") _
+
+      check22(sizeListAsADT(List()),0)
+      check22(sizeListAsADT(List(1)),1)
+      check22(sizeListAsADT(List(1, 2)),2)
+      check22(sizeListAsADT(List(1, 2, 3)),3)
+      check22(sizeListAsADT(List(1, 2, 3, 4)) , 4)
 
     }
 
   }
 
+
+/**
+*  x Natural Numbers as ADT
+ * x How it can be used in recursion
+ */
   object ExerciseLevel3 {
 
     sealed trait Natural
@@ -154,13 +191,17 @@ object PMPart3ADTs {
       val n1: Natural = N(N(Z()))
       val n2: Natural = N(N(N(Z())))
 
-      println(s" *EXERCISE31 : ${evaluate(n1) == 2}")
-      println(s" *EXERCISE31 : ${evaluate(n2) == 3}")
-      println(s" *EXERCISE31 : ${evaluate(Add(n1, n2)) == 5}")
-      println(s" *EXERCISE31 : ${evaluate(Multiply(n1, n2)) == 6}")
+      val check31=check("EXERCISE31") _
+
+      check31(evaluate(n1),2)
+      check31(evaluate(n2),3)
+      check31(evaluate(Add(n1, n2)) , 5)
+      check31(evaluate(Multiply(n1, n2)) ,6)
     }
   }
 
+  //FP BOSS - Either Type - ENERGY : [=====]
+  // [**** LEFT  ||| RIGHT *****]
   object ExerciseLevel4 {
 
     sealed trait CustomEither[+A, +B] {
@@ -187,29 +228,13 @@ object PMPart3ADTs {
       .fold(error => Response(400, error))(v => Response(200, v.toString))
 
     def exercise41() = {
-      println(s""" *EXERCISE41 : ${server(Request("someUrl", "GET", "1")).code==200}""")
-      println(s""" *EXERCISE41 : ${server(Request("someUrl", "GET", "WRONG")).code==400}""")
+      check("EXERCISE41")(server(Request("someUrl", "GET", "1")).code,200)
+      check("EXERCISE41")(server(Request("someUrl", "GET", "WRONG")).code,400)
     }
 
   }
 
 
-  def main(args: Array[String]) {
-    Demonstration.demo()
 
-//    println("[------EXERCISES------]")
-//    println("\n[------EXERCISE LEVEL 1------]")
-//    ExerciseLevel1.exercise11()
-//
-//    println("\n[------EXERCISE LEVEL 2------]")
-//    ExerciseLevel2.exercise21()
-//    ExerciseLevel2.exercise22()
-//
-//    println("\n[------EXERCISE LEVEL 3------]")
-//    ExerciseLevel3.exercise31()
-//
-//    println("\n[------EXERCISE LEVEL 4------]")
-//    ExerciseLevel4.exercise41()
-  }
 
 }
