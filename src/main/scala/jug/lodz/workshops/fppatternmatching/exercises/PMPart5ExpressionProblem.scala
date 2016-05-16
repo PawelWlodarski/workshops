@@ -1,24 +1,27 @@
 package jug.lodz.workshops.fppatternmatching.exercises
 
+import jug.lodz.workshops.Workshops
+import jug.lodz.workshops.Workshops.check
+
 /**
   * Created by pawel on 24.04.16.
   */
 object PMPart5ExpressionProblem {
 
-  //******** 1 ********
+  //******** 1 ******** OOP library where operations are part of objects
   object ObjectLibrary {
 
-    trait Shape {
-      def area(): Double
-    }
+      trait Shape {
+        def area(): Double
+      }
 
-    class Circle(r: Int) extends Shape {
-      override def area(): Double = Math.PI * r * r
-    }
+      class Circle(r: Int) extends Shape {
+        override def area(): Double = Math.PI * r * r
+      }
 
   }
 
-  //******** 2 ********
+  //******** 2 ******** Data library where operations are outside objects
   object DataLibrary {
 
     trait Shape
@@ -30,7 +33,7 @@ object PMPart5ExpressionProblem {
     }
   }
 
-  //******** 3 ********
+  //******** 3 ******** ADT library where subtypes are limited and operations may be in abstract type or outside all types
   object ADTLibrary {
 
     sealed trait Shape {
@@ -49,6 +52,12 @@ object PMPart5ExpressionProblem {
 
   object Demonstration {
 
+    /**
+      *  x  How we can use OOP library
+      *  x  List of shapes is declared as really list of shapes
+      *  x  how to add a new type
+      *  x how to add a new operation
+      */
 
     def demo1() = {
       println("* EXAMPLE1 : OBJECTS")
@@ -66,6 +75,12 @@ object PMPart5ExpressionProblem {
       println("\n* --> NOW HOW TO ADD OTHER METHODS? (circumference)")
     }
 
+    /**
+      *  x  How we can use Data library
+      *  x  We can add a polymorphic function
+      *  x  how to add a new type
+      *  x how to add a new operation
+      */
     def demo2() = {
       println("\n* EXAMPLE2 : DATA MATCHING")
       import DataLibrary._
@@ -82,6 +97,13 @@ object PMPart5ExpressionProblem {
       println("\n* --> NOW HOW TO ADD OTHER DATA TYPES? (square)")
     }
 
+    /**
+      *  x  How we can use ADT library
+      *  x  adding function is simple
+      *  x  adding function inside type with implicits
+      *  x  how to add a new type (by definition you don't want to do it)
+      *  x how to add a new operation
+      */
     def demo3() = {
       println("\n* EXAMPLE3 : ADTs")
       import ADTLibrary._
@@ -108,6 +130,20 @@ object PMPart5ExpressionProblem {
 
   }
 
+  /**
+    * FINAL BOSS
+    *
+    *
+    *
+    * |_O   / \  O_\
+    *   |'-/   \-'\
+    *   |\       / |
+    *  /  |      |  \
+    *
+    *  RIGHT BIASED EITHER  : ENERGY : [===========]
+    *
+    *
+    */
   object ExerciseLevelBoss {
 
     sealed trait RightBiasedEither[+A, +B] {
@@ -133,8 +169,8 @@ object PMPart5ExpressionProblem {
         v3 <- RBRight(3)
       } yield v1 + v2 + v3
 
-      println(s"RESULT ONE -- ALL RIGHT : ${result1 == RBRight(6)}")
-      println(s"""RESULT TWO -- ONE LEFT : ${result2 == RBLeft("There is an error")}""")
+      check("RESULT ONE -- ALL RIGHT")(result1 , RBRight(6))
+      check("RESULT TWO -- ONE LEFT")(result2 , RBLeft("There is an error"))
     }
   }
 
