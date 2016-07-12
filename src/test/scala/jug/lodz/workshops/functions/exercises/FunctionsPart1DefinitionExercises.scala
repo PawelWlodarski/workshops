@@ -11,11 +11,11 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
   //***********"LEVEL 1"****************
   // TRY TO EXPERIMENT WITH DEFINING FUNCTION IN VARIOUS FORMS - SHORT,LONG ETC..
 
-  test("define simple functions so test passes"){
-      val square : Int=>Int = ???
-      val isEven: Int=>Boolean = ???
+  test("complete function definition so that test passes"){
+      val square : Int=>Int = ???      // x*x
+      val isEven: Int=>Boolean = ???     // 3 % 2 -> 1 , 4% 2 -> 0
 
-      val isEven_underscore: Int=>Boolean = ???  //try this one with underscore
+      val isEven_underscore: Int=>Boolean = ???  //use form with underscore
 
       square(2) shouldBe 4
       square(3) shouldBe 9
@@ -27,7 +27,7 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
 
   test("operations on tuples"){
     val snd : ((String,Int)) => Int = ???  //returns second element
-    val swap : ((String,Int)) => (Int,String) = ???  //swap elements
+    val swap : ((String,Int)) => (Int,String) = ???  //swap elements   t._1 - first element, t._2 - second element
 
 
     snd(("a",1)) shouldBe(1)
@@ -38,6 +38,7 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
   }
 
 
+  //quess the order of function composition so that result is correct
   test("compose 3 functions in proper order"){
     val square : Int=>Int= i => i * i
     val fst: ((String,Int)) => String = t => t._1
@@ -49,6 +50,7 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
     squareFst("3",1) shouldBe 9
   }
 
+  //use external value inside lambda
   test("closure example"){
     val prefix="RESULT : "
 
@@ -59,6 +61,7 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
 
   //LEVEL2
 
+  //don't change test - implement 'customAndThen' method without using Function.andThen
   test("custom 'andThen' method"){
     val squareStr=customAndThen(_.toInt,i=>Math.sqrt(i))
 
@@ -67,11 +70,13 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
 
   }
 
+  //don't use Function.andThen
   def customAndThen(f:String=>Int, g:Int=>Double):String=>Int= ???
 
 
   //LEVEL3
 
+  //don't change test implement 'andThenGeneric' without Function.andThen
   test("andThen generic"){
     val isStringEven=andThenGeneric((s:String)=>s.toInt,(i:Int)=>i%2==0)  // why we need a type Int? We will return to this in 'currying' section
     val squareAndToString:Int=>String=andThenGeneric(i=>i*i,(i:Int)=>"Result is : "+i)
@@ -84,8 +89,10 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
   }
 
 
+  //don't use Function.andThen
   def andThenGeneric[A,B,C](f:A=>B,g:B=>C) : A=>C= ???
 
+  //don't change test - complete 'andThenSeq' method
   test("compose sequence of functions"){
     val intToInts=Seq[Int=>Int](_+1, i=>i*i , i=>i-1,_-1)
     val stringToStrings=Seq[String=>String](_+"a",_+"b",_+"c")
@@ -96,6 +103,7 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
   }
 
 
+  //compose all functions from a given collection
   def  andThenSeq[A](seq:Seq[A=>A]):A=>A={
       ???
   }

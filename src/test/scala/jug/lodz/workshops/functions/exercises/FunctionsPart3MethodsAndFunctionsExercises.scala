@@ -8,7 +8,7 @@ import scala.collection.mutable.{ArrayBuffer, ListBuffer}
 /**
   * Created by pawel on 09.07.16.
   */
-class unctionsPart3MethodsAndFunctionsExercises extends FunSuite with Matchers{
+class FunctionsPart3MethodsAndFunctionsExercises extends FunSuite with Matchers{
 
 
   //LEVEL1
