@@ -1,6 +1,4 @@
-package jug.lodz.workshops.functions.answers
-
-import scala.collection.mutable.ListBuffer
+package jug.lodz.workshops.functions.exercises
 
 /**
   * Created by pawel on 11.07.16.
