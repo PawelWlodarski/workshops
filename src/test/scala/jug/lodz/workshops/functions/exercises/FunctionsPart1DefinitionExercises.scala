@@ -71,7 +71,7 @@ class FunctionsPart1DefinitionExercises extends FunSuite with Matchers{
   }
 
   //don't use Function.andThen
-  def customAndThen(f:String=>Int, g:Int=>Double):String=>Int= ???
+  def customAndThen(f:String=>Int, g:Int=>Double):String=>Double= ???
 
 
   //LEVEL3

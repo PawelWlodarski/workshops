@@ -22,7 +22,7 @@ class FunctionsPart2FunctionAsValueExercises extends FunSuite with Matchers {
 
   /**
     *
-    * use for-llop
+    * use for-loop
     *
     * for(element <- collection) action
     *

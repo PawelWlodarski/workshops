@@ -115,8 +115,8 @@ class FunctionsPart3MethodsAndFunctionsExercises extends FunSuite with Matchers{
   //l.tail - remove first element List(1,2,3).tail -> List(2,3)
   @tailrec
   final def recSum(l:List[Int],sum:Int=0): Int ={
-    if(l.isEmpty) sum
-    else  recSum(l.tail,sum+l.head)
+    if(???) sum
+    else  recSum(???,???)
   }
 
 
@@ -137,10 +137,9 @@ class FunctionsPart3MethodsAndFunctionsExercises extends FunSuite with Matchers{
   // l.head
   // buffer += elem adds element to buffer
   def mapRec[A,B](l:List[A])(f:A=>B)={
-    @tailrec
+    //    @tailrec
     def mapRecBuffer(l:List[A],buffer:ListBuffer[B]):List[B]={
-      if(l.isEmpty) buffer.toList
-      else mapRecBuffer(l.tail, buffer += f(l.head))
+     ???
     }
 
     mapRecBuffer(l,ListBuffer())
