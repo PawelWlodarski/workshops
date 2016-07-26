@@ -11,41 +11,41 @@ object FunctionsPart1Definitions {
     println("  *** SECTION :  DEFINE A FUNCTION ***")
 
     // form similar to classical java - anonymous class
-    val anonymousClassForm:Function[Int,Int]=new Function[Int,Int]{
-      override def apply(i: Int): Int = i+1
+    val anonymousClassForm: Function[Int, Int] = new Function[Int, Int] {
+      override def apply(i: Int): Int = i + 1
     }
 
-//CODE  -- change Function[Int,Int] to (Int => Int)
-//    val typeAlias: Int=>Int = new Function[Int,Int]{
-//      override def apply(i: Int): Int = i+1
-//    }
+    //CODE  -- change Function[Int,Int] to (Int => Int)
+    //    val typeAlias: Int=>Int = new Function[Int,Int]{
+    //      override def apply(i: Int): Int = i+1
+    //    }
 
-//CODE  -- introduce lambda notation
-//    val shortWithType: Int=>Int = i=>i+1
-//    val shortWithTypeInLambda = (i:Int) => i+1
-//
-//    val inc=(i:Int) => i+1   // reason for short names! // type inference
-//
-//    val f:Int=>Int=_+1  // with underscore
-//
-//    println("      * anonymous class form: "+anonymousClassForm(7))
-//    println("      * type alias form: "+typeAlias(7))
-//    println("      * short with Type form: "+shortWithType(7))
-//    println("      * short with type in lambda form: "+shortWithTypeInLambda(7))
-//    println("      * inc form: "+inc(7))
-//    println("      * underscore form: "+f(7))
+    //CODE  -- introduce lambda notation
+    //    val shortWithType: Int=>Int = i=>i+1
+    //    val shortWithTypeInLambda = (i:Int) => i+1
+    //
+    //    val inc=(i:Int) => i+1   // reason for short names! // type inference
+    //
+    //    val f:Int=>Int=_+1  // with underscore
+    //
+    //    println("      * anonymous class form: "+anonymousClassForm(7))
+    //    println("      * type alias form: "+typeAlias(7))
+    //    println("      * short with Type form: "+shortWithType(7))
+    //    println("      * short with type in lambda form: "+shortWithTypeInLambda(7))
+    //    println("      * inc form: "+inc(7))
+    //    println("      * underscore form: "+f(7))
 
 
     println("\n  *** SECTION :  FUNCTIONS COMPOSITION ***")
 
 
-    val parse: String => Int = s=>s.toInt  //exercise - make short with underscore
-    val square:Int=>Int = i=> i * i
+    val parse: String => Int = s => s.toInt //exercise - make short with underscore
+    val square: Int => Int = i => i * i
 
-//CODE - dot is not needed
-//    val squareString=parse andThen square
-//
-//    println("      *  square string : "+squareString("4"))
+    //CODE - dot is not needed
+    //    val squareString=parse andThen square
+    //
+    //    println("      *  square string : "+squareString("4"))
 
 
     println("\n  *** SECTION :  SUGAR ***")
@@ -60,26 +60,26 @@ object FunctionsPart1Definitions {
     println("\n  *** SECTION :  TUPLES ***")
     //1) every project has class 'Pair'
     //2) standardization
-    val t1=(1)
-    val t2=("a",1)
-    val t3=("a",1,false)
+    val t1 = (1)
+    val t2 = ("a", 1)
+    val t3 = ("a", 1, false)
 
-    val withoutSugar=new Triple[String,Int,Boolean]("a",1,false)
+    val withoutSugar = new Triple[String, Int, Boolean]("a", 1, false)
 
-    println("      * 3 elements tuple : "+withoutSugar)
+    println("      * 3 elements tuple : " + withoutSugar)
 
-//CODE
-//    println(s"      * tuple elements: (${t3._1},${t3._2},${t3._3})")
+    //CODE
+    //    println(s"      * tuple elements: (${t3._1},${t3._2},${t3._3})")
 
     println("\n  *** SECTION :  CLOSURE *** ")
     //using external variables
 
-    val config=Map[String,Double]("tax"->0.23)
-//    val config=Map("tax"->0.23)  // type inference
+    val config = Map[String, Double]("tax" -> 0.23)
+    //    val config=Map("tax"->0.23)  // type inference
 
-    val gross=(net:Int)=>config("tax") * net + net
+    val gross = (net: Int) => config("tax") * net + net
 
-    println("      * taking tax from closure 10 + 2.3 : "+gross(10))
+    println("      * taking tax from closure 10 + 2.3 : " + gross(10))
   }
 
 }

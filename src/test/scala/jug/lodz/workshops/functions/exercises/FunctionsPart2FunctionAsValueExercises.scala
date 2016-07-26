@@ -64,8 +64,8 @@ class FunctionsPart2FunctionAsValueExercises extends FunSuite with Matchers {
 
   // implement 'parseInt' and 'filter' so that usage of map and filter from standard library return proper result
   test("use build in map and filter") {
-    val parseInt : String => Int = ???
-    val square = (i:Int) => ???
+    val parseInt: String => Int = ???
+    val square = (i: Int) => ???
 
     val mappingFunction: String => Int = parseInt andThen square
 
@@ -80,9 +80,9 @@ class FunctionsPart2FunctionAsValueExercises extends FunSuite with Matchers {
 
   // 'executeWithTwo' receives a function as a parameter and you need to invoke this function with parameter=2
   // similar thinking for 'reportExecution'
-  test("a function receiving a function"){
-    val executeWithTwo: (Int=>Int) => Int = ???
-    val reportExecution: (Int => Int ) => String = ???
+  test("a function receiving a function") {
+    val executeWithTwo: (Int => Int) => Int = ???
+    val reportExecution: (Int => Int) => String = ???
 
     // implement execute with two so the result of result2(x->x*5) is 10
     val result1: Integer = executeWithTwo.apply(x => x * 5)
@@ -98,38 +98,37 @@ class FunctionsPart2FunctionAsValueExercises extends FunSuite with Matchers {
   //LEVEL2
 
   //don't change this test - implement 'genericMap' method
-  test("implement generic map"){
+  test("implement generic map") {
     val transactions: List[(String, BigDecimal)] = List(
       ("t1", BigDecimal("20")),
       ("t2", BigDecimal("30")),
       ("t3", BigDecimal("60"))
     )
 
-    val tax=BigDecimal("0.23")
+    val tax = BigDecimal("0.23")
 
 
-    val netMoney: Seq[BigDecimal] =genericMap(transactions, (t:(String,BigDecimal))=>t._2)
-    val grossMoney: Seq[BigDecimal] =genericMap(netMoney, (m:BigDecimal)=> m +  m * tax)
+    val netMoney: Seq[BigDecimal] = genericMap(transactions, (t: (String, BigDecimal)) => t._2)
+    val grossMoney: Seq[BigDecimal] = genericMap(netMoney, (m: BigDecimal) => m + m * tax)
 
-    grossMoney should contain theSameElementsAs Seq(BigDecimal("24.60"),BigDecimal("36.90"),BigDecimal("73.80"))
+    grossMoney should contain theSameElementsAs Seq(BigDecimal("24.60"), BigDecimal("36.90"), BigDecimal("73.80"))
   }
-
 
 
   // use for-loop and arraybuffer
-  def genericMap[A,B](seq: Seq[A], f: A => B): Seq[B] = {
-   ???
+  def genericMap[A, B](seq: Seq[A], f: A => B): Seq[B] = {
+    ???
   }
 
   //don't change this test - implement 'genericFilter' method
-  test("generic filter"){
+  test("generic filter") {
     val transactions: List[(String, BigDecimal)] = List(
       ("t1", BigDecimal("20")),
       ("t2", BigDecimal("30")),
       ("t1", BigDecimal("60"))
     )
 
-    val result=genericFilter(transactions, (t:(String,BigDecimal))=>t._1=="t1")
+    val result = genericFilter(transactions, (t: (String, BigDecimal)) => t._1 == "t1")
 
     result should contain theSameElementsAs Seq(
       ("t1", BigDecimal("20")),

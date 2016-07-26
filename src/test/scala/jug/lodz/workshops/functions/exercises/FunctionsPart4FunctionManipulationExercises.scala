@@ -42,65 +42,65 @@ class FunctionsPart4FunctionManipulationExercises extends FunSuite with Matchers
   /**
     * Don't change test - implement 'decorateWithNullCheck'
     */
-  test("decorate with null check"){
-      val parse : String => Int = s=>s.toInt
+  test("decorate with null check") {
+    val parse: String => Int = s => s.toInt
 
-      val parseNullCheck=decorateWithNullCheck(parse,"0")
+    val parseNullCheck = decorateWithNullCheck(parse, "0")
 
 
-      parseNullCheck("55") shouldBe 55
-      parseNullCheck(null) shouldBe 0
+    parseNullCheck("55") shouldBe 55
+    parseNullCheck(null) shouldBe 0
 
   }
 
   // create a function :
   // if argument is not null then invoke f with it
   // if argument IS null then invoke f with default argument
-  def decorateWithNullCheck(f: String => Int,default:String) : String=>Int = ???
+  def decorateWithNullCheck(f: String => Int, default: String): String => Int = ???
 
 
   //LEVEL2
   /**
     * Don't change test - implement 'curry' method
     */
-  test("convert function with two args to curried version"){
-    type Parser= String => Int
-    val parser : Parser = s=>s.toInt
+  test("convert function with two args to curried version") {
+    type Parser = String => Int
+    val parser: Parser = s => s.toInt
 
-    val incrementParsed:(Parser,String) => Int = (parser,arg) => parser(arg)+1
+    val incrementParsed: (Parser, String) => Int = (parser, arg) => parser(arg) + 1
 
     val curriedFunction = curry(incrementParsed)
 
-    val incrementNumericString: String => Int = curriedFunction(_.toInt)
+    val incrementNumericString: String => Int = curriedFunction(parser)
 
     incrementNumericString("5") shouldBe 6
     incrementNumericString("11") shouldBe 12
   }
 
-  def curry[A,B,C](f:(A,B)=>C): A=>B=>C = ???
+  def curry[A, B, C](f: (A, B) => C): A => B => C = ???
 
   /**
     * don't change test - implement uncurry
     */
-  test("implement uncurry"){
-    val addCurried: Int=>Int=>Int = a=>b=>a+b
+  test("implement uncurry") {
+    val addCurried: Int => Int => Int = a => b => a + b
 
     val addUncurried = uncurry(addCurried)
 
-    addUncurried(1,3) shouldBe 4
-    addUncurried(8,7) shouldBe 15
+    addUncurried(1, 3) shouldBe 4
+    addUncurried(8, 7) shouldBe 15
   }
 
-  def uncurry[A,B,C](f:A=>B=>C): (A,B) => C = ???
+  def uncurry[A, B, C](f: A => B => C): (A, B) => C = ???
 
 
   /**
     * don't change tets - implement 'reduce' method with provided skeleton
     */
-  test("reduce curried"){
+  test("reduce curried") {
 
-    val addition = reduce(List(1,2,3,4,5))(_+_)
-    val multiplication = reduce(List(1,2,3,4,5))(_*_)
+    val addition = reduce(List(1, 2, 3, 4, 5))(_ + _)
+    val multiplication = reduce(List(1, 2, 3, 4, 5))(_ * _)
 
 
     addition shouldBe 15
@@ -108,10 +108,10 @@ class FunctionsPart4FunctionManipulationExercises extends FunSuite with Matchers
   }
 
   //assume that seq is not empty
-  def reduce[A](l:List[A])(f:(A,A)=>A): A ={
-    var result=l.head
+  def reduce[A](l: List[A])(f: (A, A) => A): A = {
+    var result = l.head
 
-    for(e <- l.tail)  ???
+    for (e <- l.tail) ???
 
     result
   }
@@ -119,12 +119,12 @@ class FunctionsPart4FunctionManipulationExercises extends FunSuite with Matchers
 
   //LEVEL3
 
-  test("domain example"){
+  test("domain example") {
     import DomainExample._
 
     //policy allow customers with cash higher than 10
-    val lightPolicy : Policy = (cash:Cash) => ???
-    val longTermBusiness : BusinessLogic = cash => cash + Math. ceil(cash * 0.1).toInt
+    val lightPolicy: Policy = (cash: Cash) => ???
+    val longTermBusiness: BusinessLogic = cash => cash + Math.ceil(cash * 0.1).toInt
 
     val bankWithLightPolicy = cashService(???) _
     val longTermfinancialService = bankWithLightPolicy(???)
@@ -134,7 +134,6 @@ class FunctionsPart4FunctionManipulationExercises extends FunSuite with Matchers
     longTermfinancialService(100) shouldBe 110
     longTermfinancialService(18) shouldBe 20
   }
-
 
 
 }

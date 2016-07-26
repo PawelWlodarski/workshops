@@ -24,7 +24,7 @@ class FunctionsPart5PartialFunctionsAndEffectsExercises extends FunSuite with Ma
 
   //EXERCISE - key present -> Some(value), key missing -> None
   def safeGet[A, B](map: java.util.HashMap[A, B], key: A): Option[B] = {
-   ???
+    ???
   }
 
   //LEVEL2
@@ -70,30 +70,34 @@ class FunctionsPart5PartialFunctionsAndEffectsExercises extends FunSuite with Ma
     * |    |  _/ __ \  \/ // __ \|  |    /   |  |_  |    |  _//  _ \/  ___//  ___/
     * |    |__\  ___/\   /\  ___/|  |__ /    ^   /  |    |   (  <_> )___ \ \___ \
     * |_______ \___  >\_/  \___  >____/ \____   |   |______  /\____/____  >____  >
-    *              \/          \/            |__|          \/           \/     \/
+    * \/          \/            |__|          \/           \/     \/
     * .                                           ____    ____  ____________________
     * /\|\/\     /\|\/\     /\|\/\     /\|\/\   |    |   |   \_   _____/\__    ___/  /\|\/\     /\|\/\     /\|\/\     /\|\/\
     * _)    (__  _)    (__  _)    (__  _)    (__ |    |   |   ||    __)    |    |    _)    (__  _)    (__  _)    (__  _)    (__
     * \_     _/  \_     _/  \_     _/  \_     _/ |    |___|   ||     \     |    |    \_     _/  \_     _/  \_     _/  \_     _/
     * )      \     )    \     )    \     )    \  |_______ \___|\___  /     |____|      )    \     )    \     )    \     )    \
     * \/\|\/     \/\|\/     \/\|\/     \/\|\/          \/        \/                  \/\|\/     \/\|\/     \/\|\/     \/\|\/
-    */
+    **/
 
 
-  test("fight BOSS! Lift Pure function to Option level"){
-    val parseTotal : String=>Option[Int] = s=>
-      try{Option(s.toInt)}
-      catch{case e:Exception => None}
+  test("fight BOSS! Lift Pure function to Option level") {
+    val parseTotal: String => Option[Int] = s =>
+      try {
+        Option(s.toInt)
+      }
+      catch {
+        case e: Exception => None
+      }
 
-    val tax=0.23
+    val tax = 0.23
 
-    val gross:Int=>Double = net => net+net*0.23
-    val displayCurrency:Double=>String= amount => amount+"$"
+    val gross: Int => Double = net => net + net * 0.23
+    val displayCurrency: Double => String = amount => amount + "$"
 
     val grossLifted = lift(gross)
     val displayCurrencyLifted = lift(displayCurrency)
 
-    val parseCurrencyWithTax= parseTotal andThen grossLifted andThen displayCurrencyLifted
+    val parseCurrencyWithTax = parseTotal andThen grossLifted andThen displayCurrencyLifted
 
     parseCurrencyWithTax("100") shouldBe Some("123.0$")
     parseCurrencyWithTax("10") shouldBe Some("12.3$")
@@ -102,7 +106,7 @@ class FunctionsPart5PartialFunctionsAndEffectsExercises extends FunSuite with Ma
 
   }
 
-  def lift[A,B](f:A=>B) : Option[A] => Option[B] = ???
+  def lift[A, B](f: A => B): Option[A] => Option[B] = ???
 
 }
 
