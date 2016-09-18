@@ -1,4 +1,4 @@
-package jug.lodz.workshops.fpmechanics.intro
+package jug.lodz.workshops.old.intro
 
 object FunctionAsAValue {
 

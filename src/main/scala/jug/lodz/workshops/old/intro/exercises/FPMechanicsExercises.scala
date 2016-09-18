@@ -1,4 +1,4 @@
-package jug.lodz.workshops.fpmechanics.intro.exercises
+package jug.lodz.workshops.old.intro.exercises
 
 
 object FPMechanicsExercises {
