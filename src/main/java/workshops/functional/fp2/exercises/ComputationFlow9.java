@@ -1,11 +1,8 @@
 package workshops.functional.fp2.exercises;
 
-import javaslang.control.Match;
 import javaslang.control.Try;
 import workshops.functional.fp2.answers.LoggerModuleAnswer;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
