@@ -60,4 +60,13 @@ public class FPMattersJavaCompositionExercisesTest {
         return null;
     }
 
+
+    @Test
+    public void reverseWithFoldR(){
+        javaslang.collection.List<Integer> slangList = javaslang.collection.List.of(1, 2, 3, 4, 5);
+
+        //use slangList.foldRight and slangList.append
+        Function<javaslang.collection.List<Integer>,javaslang.collection.List<Integer>> reverse= null;
+        assertThat(reverse.apply(slangList)).isEqualTo(javaslang.collection.List.of(5,4,3,2,1));
+    }
 }
