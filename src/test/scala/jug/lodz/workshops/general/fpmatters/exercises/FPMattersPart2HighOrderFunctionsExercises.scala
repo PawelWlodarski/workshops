@@ -5,7 +5,7 @@ import org.scalatest.{FunSuite, Matchers}
 /**
   * Created by pawel on 19.09.16.
   */
-class FPMattersPart2HighOrderFunctionsAnswers extends FunSuite with Matchers {
+class FPMattersPart2HighOrderFunctionsExercises extends FunSuite with Matchers {
 
   //implement those customCurry and customUncurry - don't change test
   test("custom curry & uncurry") {
