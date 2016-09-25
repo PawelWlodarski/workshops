@@ -1,4 +1,4 @@
-package workshops.functional.general.fpmatters.answers;
+package workshops.functional.general.fpmatters.exercises;
 
 import org.junit.Test;
 
@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by pawel on 25.09.16.
  */
-public class FPMattersHighOrderFunctionsAnswers {
+public class FPMattersHighOrderFunctionsExerciseTest {
 
     @Test
     public void customCurrying() {
@@ -27,13 +26,13 @@ public class FPMattersHighOrderFunctionsAnswers {
         assertThat(curried.apply(3).apply(4)).isEqualTo(7);
         assertThat(uncurried.apply(3, 4)).isEqualTo(7);
     }
-
+    //replace null
     <A, B, C> Function<A, Function<B, C>> curry(BiFunction<A, B, C> f) {
-        return a -> b -> f.apply(a, b);
+        return null;
     }
-
+    //replace null
     <A, B, C> BiFunction<A, B, C> uncurry(Function<A, Function<B, C>> f) {
-        return (a, b) -> f.apply(a).apply(b);
+        return null;
     }
 
 
@@ -47,10 +46,10 @@ public class FPMattersHighOrderFunctionsAnswers {
 
     //fp clean code -f,as
     <A, B> B foldR(BiFunction<A, B, B> f, B zero, Collection<A> as) {
-        B acc = zero;
+        B acc = null; //replace null with proper assignemnt
 
         for (A a : as) {
-            acc = f.apply(a, acc);
+            acc = null; //replace null with proper acc computation
         }
 
         return acc;
@@ -65,11 +64,7 @@ public class FPMattersHighOrderFunctionsAnswers {
 
     //STATEMENT vs EXPRESSION
     <A> Collection<A> filterViaFoldR(Function<A,Boolean> f, Collection<A> xs){
-        BiFunction<A,Collection<A>,Collection<A>> filterOut=(e,acc) -> {
-            if(f.apply(e))acc.add(e);
-
-            return acc;
-        };
+        BiFunction<A,Collection<A>,Collection<A>> filterOut=null; //replace null with function body
 
         return foldR(filterOut,new LinkedList<>(),xs);
     }
@@ -84,10 +79,7 @@ public class FPMattersHighOrderFunctionsAnswers {
 
 
     <A,B> Collection<B> mapViaFoldR(Function<A,B> f,Collection<A> xs){
-        BiFunction<A,Collection<B>,Collection<B>> map=(e,acc) -> {
-            acc.add(f.apply(e));
-            return acc;
-        };
+        BiFunction<A,Collection<B>,Collection<B>> map=null; //replace null with function body
         return foldR(map,new LinkedList<>(),xs);
     }
 

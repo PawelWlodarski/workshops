@@ -1,4 +1,4 @@
-package workshops.functional.general.fpmatters.exercises;
+package workshops.functional.general.fpmatters.answers;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by pawel on 25.09.16.
  */
-public class FPMattersHighOrderFunctionsExercise {
+public class FPMattersHighOrderFunctionsAnswersTest {
 
     @Test
     public void customCurrying() {
@@ -26,13 +26,13 @@ public class FPMattersHighOrderFunctionsExercise {
         assertThat(curried.apply(3).apply(4)).isEqualTo(7);
         assertThat(uncurried.apply(3, 4)).isEqualTo(7);
     }
-    //replace null
+
     <A, B, C> Function<A, Function<B, C>> curry(BiFunction<A, B, C> f) {
-        return null;
+        return a -> b -> f.apply(a, b);
     }
-    //replace null
+
     <A, B, C> BiFunction<A, B, C> uncurry(Function<A, Function<B, C>> f) {
-        return null;
+        return (a, b) -> f.apply(a).apply(b);
     }
 
 
@@ -46,10 +46,10 @@ public class FPMattersHighOrderFunctionsExercise {
 
     //fp clean code -f,as
     <A, B> B foldR(BiFunction<A, B, B> f, B zero, Collection<A> as) {
-        B acc = null; //replace null with proper assignemnt
+        B acc = zero;
 
         for (A a : as) {
-            acc = null; //replace null with proper acc computation
+            acc = f.apply(a, acc);
         }
 
         return acc;
@@ -64,7 +64,11 @@ public class FPMattersHighOrderFunctionsExercise {
 
     //STATEMENT vs EXPRESSION
     <A> Collection<A> filterViaFoldR(Function<A,Boolean> f, Collection<A> xs){
-        BiFunction<A,Collection<A>,Collection<A>> filterOut=null; //replace null with function body
+        BiFunction<A,Collection<A>,Collection<A>> filterOut=(e,acc) -> {
+            if(f.apply(e))acc.add(e);
+
+            return acc;
+        };
 
         return foldR(filterOut,new LinkedList<>(),xs);
     }
@@ -79,7 +83,10 @@ public class FPMattersHighOrderFunctionsExercise {
 
 
     <A,B> Collection<B> mapViaFoldR(Function<A,B> f,Collection<A> xs){
-        BiFunction<A,Collection<B>,Collection<B>> map=null; //replace null with function body
+        BiFunction<A,Collection<B>,Collection<B>> map=(e,acc) -> {
+            acc.add(f.apply(e));
+            return acc;
+        };
         return foldR(map,new LinkedList<>(),xs);
     }
 
