@@ -16,57 +16,57 @@ public class FPMattersJavaCompositionExercisesTest {
 
 
     @Test
-    public void compose(){
-        Function<Integer,Integer> f1= i->i+10;
-        Function<String,Integer> f2=Integer::parseInt;
-        Function<Integer,Double> f3 = i -> i/2.0;
+    public void compose() {
+        Function<Integer, Integer> f1 = i -> i + 10;
+        Function<String, Integer> f2 = Integer::parseInt;
+        Function<Integer, Double> f3 = i -> i / 2.0;
 
         //Use f1,f2,f3 to receive final result
-        Function<String,Double> composed =null;
+        Function<String, Double> composed = null;
 
         assertThat(composed.apply("21")).isEqualTo(15.5);
         assertThat(composed.apply("30")).isEqualTo(20.0);
     }
 
     @Test
-    public void composeCurried(){
-        Function<String,Integer> f1=Integer::parseInt;
-        BiFunction<Integer,Integer,Integer> f2= (x,y)->x * y;
+    public void composeCurried() {
+        Function<String, Integer> f1 = Integer::parseInt;
+        BiFunction<Integer, Integer, Integer> f2 = (x, y) -> x * y;
 
         //use curry,f1,f2 to build final result
-        Function<String,Function<Integer,Integer>> composed= null;
+        Function<String, Function<Integer, Integer>> composed = null;
 
         assertThat(composed.apply("10").apply(3)).isEqualTo(30);
     }
 
-    Function<Integer,Function<Integer,Integer>> curry(BiFunction<Integer,Integer,Integer> f){
-        return a->b->f.apply(a,b);
+    Function<Integer, Function<Integer, Integer>> curry(BiFunction<Integer, Integer, Integer> f) {
+        return a -> b -> f.apply(a, b);
     }
 
 
     @Test
-    public void sumWithReduce(){
+    public void sumWithReduce() {
         List<Integer> integers = Arrays.asList(1, 2, 3, 4, 5);
 
         //implement product function with list.stream() framework and stream.reduce
-        Function<List<Integer>,Integer> product=null;
+        Function<List<Integer>, Integer> product = null;
 
         assertThat(sum(integers)).isEqualTo(15);
         assertThat(product.apply(integers)).isEqualTo(120);
     }
 
     //implement sum method with list.stream() framework and stream.reduce
-    Integer sum(List<Integer> input){
+    Integer sum(List<Integer> input) {
         return null;
     }
 
 
     @Test
-    public void reverseWithFoldR(){
+    public void reverseWithFoldR() {
         javaslang.collection.List<Integer> slangList = javaslang.collection.List.of(1, 2, 3, 4, 5);
 
         //use slangList.foldRight and slangList.append
-        Function<javaslang.collection.List<Integer>,javaslang.collection.List<Integer>> reverse= null;
-        assertThat(reverse.apply(slangList)).isEqualTo(javaslang.collection.List.of(5,4,3,2,1));
+        Function<javaslang.collection.List<Integer>, javaslang.collection.List<Integer>> reverse = null;
+        assertThat(reverse.apply(slangList)).isEqualTo(javaslang.collection.List.of(5, 4, 3, 2, 1));
     }
 }

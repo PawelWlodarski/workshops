@@ -5,10 +5,10 @@ import org.scalatest.{FunSuite, Matchers}
 /**
   * Created by pawel on 25.09.16.
   */
-class FPMattersPart3LazinessExercises extends FunSuite with Matchers{
+class FPMattersPart3LazinessExercises extends FunSuite with Matchers {
 
-  test("sum of even numbers"){
-    def sumNFirstEvenNumbers(n:Int):Int= ???
+  test("sum of even numbers") {
+    def sumNFirstEvenNumbers(n: Int): Int = ???
 
     sumNFirstEvenNumbers(5) shouldBe 30
     sumNFirstEvenNumbers(6) shouldBe 42
@@ -16,8 +16,8 @@ class FPMattersPart3LazinessExercises extends FunSuite with Matchers{
 
 
   //if divided by 3 -> Fizz, if divided by 5 -> Buzz , if divided by 3 and 5 -> Fizz Buzz
-  test("fizz buzz"){
-    def fizzBuzz:Stream[Any]= ???
+  test("fizz buzz") {
+    def fizzBuzz: Stream[Any] = ???
 
     fizzBuzz.take(26).toList shouldBe List(
       1, 2, "Fizz", 4, "Buzz", "Fizz", 7, 8, "Fizz", "Buzz",
@@ -26,11 +26,11 @@ class FPMattersPart3LazinessExercises extends FunSuite with Matchers{
   }
 
 
-  test("isPrime"){
+  test("isPrime") {
     //use Stream.range and Stream.forAll
-    def isPrime(n:Int):Boolean = ???
+    def isPrime(n: Int): Boolean = ???
 
-    List(3,8,11,17,20).map(isPrime) shouldBe List(true,false,true,true,false)
+    List(3, 8, 11, 17, 20).map(isPrime) shouldBe List(true, false, true, true, false)
   }
 
 
