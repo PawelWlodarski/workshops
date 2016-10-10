@@ -28,7 +28,7 @@ squareRoot2 eps n = relative eps (iterate (next n) 1.0)
 -- [2,4,6,8,10,12,14,16,18,20]
 -- *> foldr (+) 0 $ take 10 [1..]
 -- 55
-
+--  let fib = 0 : 1 : zipWith (+) fib (tail fib)
 
 
 -- EXERCISE

@@ -74,7 +74,7 @@ object FPMattersPart2HighOrderFunctions {
       case head :: tail => f(head, generalLoop(tail)(zero)(f))
     }
 
-    //MANIPULATE CONDITION INDEPENDENTLY!!
+    //MANIPULATE COMPOSITION INDEPENDENTLY!!
     val grossPrice: (Product) => BigDecimal = getPrice andThen gross // try to comment out gross , how much code need to change
     val sumGrossPrice: (Product) => (BigDecimal) => BigDecimal = grossPrice andThen MathLibrary.sum.curried //change sum to max
     val conditionUncurried: (Product, BigDecimal) => BigDecimal = Function.uncurried(sumGrossPrice)
@@ -82,7 +82,7 @@ object FPMattersPart2HighOrderFunctions {
     //COMPOSITION WITH DIFFERENT TYPES
     //    val buildCsv=Function.uncurried(grossPrice andThen CSVLib.joinCsvLine.curried)
     //    val buildNamesCsv=Function.uncurried(getName andThen CSVLib.joinCsvLine.curried)
-    //("")(buildCsv)
+    //("")(buildCsv) - try this variant
 
     //different types
     //    val compositionResult=generalLoop(List(tv,pc,mouse))(BigDecimal(0))(conditionUncurried)

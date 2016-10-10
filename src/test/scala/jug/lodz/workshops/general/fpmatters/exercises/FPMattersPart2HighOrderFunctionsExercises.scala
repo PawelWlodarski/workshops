@@ -84,7 +84,7 @@ class FPMattersPart2HighOrderFunctionsExercises extends FunSuite with Matchers {
     oddNumbersSequence(7) shouldBe List(1, 3, 5, 7, 9, 11, 13)
   }
 
-  //simple if is enough
+  //simple "if" is enough here
   def iterate[A](f: A => A)(a: A)(n: Int): List[A] = ???
 
   //Domain

@@ -41,7 +41,7 @@ class FPMattersPart1CompositionExercises extends FunSuite with Matchers {
   // To append at the end of list use :+ operator list :+ element
   test("reverse with foldr") {
     val reverse: List[Int] => List[Int] = input =>
-      input.foldRight(List.empty[Int])((elem, acc) => acc :+ elem)
+      input.foldRight(List.empty[Int])(???)
 
     reverse(List(1, 2, 3, 4, 5)) shouldBe List(5, 4, 3, 2, 1)
   }
