@@ -1,4 +1,4 @@
-package jug.lodz.workshops.starter.oop;
+package jug.lodz.workshops.starter.oop1;
 
 public class UserJava {
     private String name;

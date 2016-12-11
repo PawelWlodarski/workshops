@@ -1,4 +1,4 @@
-package jug.lodz.workshops.starter.oop
+package jug.lodz.workshops.starter.oop1
 
 object StarterOOP1ClassesInScalaDemo {
 
@@ -13,15 +13,13 @@ object StarterOOP1ClassesInScalaDemo {
 
     println("\n *** Displaying java class : "+userJava)
 
-    //CODE : create equivalent scala class
-    class ScalaUser(val name:String,val age:Int){
-      override def toString = s"ScalaUser($name, $age)"  // String interpolation!
-    }
+    //CODE : create equivalent scala class- ScalaUser at the bottom of the file
 
-    //show javap source
-    val scalaUser=new ScalaUser("Bogumila",18)
+    //TOME : show javap source ,
+    val scalaUser: UserScala =new UserScala("Bogumila",18)
 
     println(s"\n *** Displaying java class : $scalaUser")
+
 
     class Example(_variable1:String){  //no val
       println("\n *** this is constructor in Example class")
@@ -34,7 +32,13 @@ object StarterOOP1ClassesInScalaDemo {
     example.variable
 //    example._variable1 //ILLEGAL
 
+
     //SHOW REPL
   }
 
+}
+
+//CODE : change val to var and show bytecode
+class UserScala(val name: String, val age: Int) {
+  override def toString = s"ScalaUser($name, $age)" // String interpolation!
 }

@@ -1,6 +1,6 @@
 package jug.lodz.workshops.propertybased
 
-import algebra.Monoid
+import cats._
 import cats.Functor
 import jug.lodz.workshops.propertybased.PBTDomain.{Price, Product}
 import jug.lodz.workshops.propertybased.PBTMonoids.PriceMonoid
@@ -28,7 +28,7 @@ object PBTFunctors {
 
 
   def main(args: Array[String]) {
-    import cats.std.all._
+    import cats.implicits._
     implicit val monoid=PriceMonoid
 
     val products= List(

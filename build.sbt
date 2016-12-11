@@ -1,15 +1,15 @@
-name := """jug-workshops"""
+val cats = "org.typelevel" %% "cats" % "0.8.1"
+val scalaTest= "org.scalatest" %% "scalatest" % "3.0.1" % "test"
+val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
 
-version := "1.0"
-
-scalaVersion := "2.11.7"
-
-libraryDependencies += "junit" % "junit" % "4.12"
-libraryDependencies += "org.assertj" % "assertj-core" % "3.3.0"
-
-libraryDependencies += "io.javaslang" % "javaslang" % "2.0.3"
-
-libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
-libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.5" % "test"
-
-libraryDependencies += "org.typelevel" %% "cats" % "0.4.1"
+val root=(project in file("."))
+    .settings(
+        name := """jug-workshops""",
+        version := "1.0",
+        scalaVersion := "2.12.1"
+    ).settings(
+    libraryDependencies ++= Seq(
+      cats,
+      scalaTest,scalaCheck
+    )
+  )

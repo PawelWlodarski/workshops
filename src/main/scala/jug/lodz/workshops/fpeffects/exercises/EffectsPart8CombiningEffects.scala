@@ -40,7 +40,7 @@ object EffectsPart8CombiningEffects {
 
   def main(args: Array[String]) {
     import cats.data.OptionT
-    import cats.std.future._
+    import cats.implicits._
 
     val result = for {
       id <- OptionT(service1("company1"))

@@ -17,6 +17,7 @@ object PMPart2CaseClassesAnswer {
 
       record match {
         case SomeClass("someValue") => println("  --> exact match : case SomeClass(\"someValue\")")
+        case _ => println("something else")
       }
 
       record match {
@@ -49,6 +50,7 @@ object PMPart2CaseClassesAnswer {
       users match {
         case User(_, Address(_, City(city1))) :: User(_, Address(_, City(city2))) :: Nil =>
           println(s"  --> there are two cities : [$city1,$city2]")
+        case _ => println("something else")
       }
 
       println("\n *[Matching In Partial Functions]")

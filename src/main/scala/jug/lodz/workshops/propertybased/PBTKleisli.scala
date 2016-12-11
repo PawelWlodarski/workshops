@@ -10,7 +10,7 @@ object PBTKleisli {
 
   def main(args: Array[String]) {
     import cats.data.Kleisli
-    import cats.std.all._
+    import cats.implicits._
     val split:String=>List[String] = s=>s.split(" ").toList
     val variants:String=>List[String] = s=>List(s,s.toUpperCase,s.toLowerCase)
 

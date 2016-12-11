@@ -1,6 +1,6 @@
 package jug.lodz.workshops.propertybased
 
-import algebra.Monoid
+import cats._
 
 /**
   * Created by pawel on 06.03.16.

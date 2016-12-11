@@ -117,7 +117,8 @@ object EffectsPart7OtherEffectsAnswer {
     println(map2App(Some(1), Some(2))(_ + _) == Some(3))
 
     println("\n\n♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪ ADDITIONAL HARDCORE ♪┏(°.°)┛┗(°.°)┓┗(°.°)┛┏(°.°)┓ ♪")
-    import cats.std.all._
+    import cats._
+    import cats.implicits._
     //      implicit val applicativeOption:Apply[Option] = Apply[Option]
     //      implicit val applicativeList:Apply[List] = Apply[List]
     println(universalMap3(Option(1), Option(2), Option(3))(_ + _ + _) == Some(6))

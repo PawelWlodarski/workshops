@@ -1,7 +1,5 @@
 package jug.lodz.workshops.fp2.answers
 
-import cats.Functor
-
 import scala.io.{BufferedSource, Source}
 import scala.util.Try
 
@@ -47,7 +45,7 @@ object FP2MapList6Answer {
   def liftTry[A,B](f:A=>B):Try[A]=>Try[B] = tryInput=>tryInput.map(f)
 
   //ADDITIONAL HARDCORE
-  import cats.std.all._
+  import cats._
   implicit val listFunctor:Functor[List]=Functor[List]
   implicit val optionFunctor:Functor[Option]=Functor[Option]
 
