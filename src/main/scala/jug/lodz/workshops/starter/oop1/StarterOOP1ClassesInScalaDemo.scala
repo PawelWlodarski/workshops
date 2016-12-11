@@ -25,6 +25,17 @@ object StarterOOP1ClassesInScalaDemo {
       println("\n *** this is constructor in Example class")
 
       def variable=_variable1  //getter
+      //TOME - explain method basics
+      def getVariable={
+        println("log")
+        _variable1 //last statement is return , don't use return build in scala!!!
+      }
+    }
+
+    //More similar to classical java
+    class ExamplePrivateVariables{
+      private var variable:String = ""
+      def setVariabl(v:String):Unit= variable = v
     }
 
     // CODE : EXAMPLE CASES - show javap again

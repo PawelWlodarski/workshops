@@ -6,7 +6,7 @@ object StarterOOP1ObjectsDemo {
     println(" *** SCALA STARTER OOP - TRAITS & SINGLETON OBJECTS")
 
     println("   * You can implement java interfaces with scala classes")
-    val scalaImplementation:JavaInterface=new ScalaImplementation("scalaValue")
+    val scalaImplementation:JavaInterface=new ScalaImplementation("scalaValue")  // what will happen without explicit type??
     println("   * Scala implementation : \n"+scalaImplementation.toJson)
 
     //CALLING JAVA STATIC METHODS
