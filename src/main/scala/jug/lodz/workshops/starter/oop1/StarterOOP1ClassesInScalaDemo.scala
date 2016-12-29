@@ -18,7 +18,7 @@ object StarterOOP1ClassesInScalaDemo {
     //TOME : show javap source ,
     val scalaUser: UserScala =new UserScala("Bogumila",18)
 
-    println(s"\n *** Displaying java class : $scalaUser")
+    println(s"\n *** Displaying scala class : $scalaUser")
 
 
     class Example(_variable1:String){  //no val
@@ -35,7 +35,7 @@ object StarterOOP1ClassesInScalaDemo {
     //More similar to classical java
     class ExamplePrivateVariables{
       private var variable:String = ""
-      def setVariabl(v:String):Unit= variable = v
+      def setVariable(v:String):Unit= variable = v
     }
 
     // CODE : EXAMPLE CASES - show javap again
