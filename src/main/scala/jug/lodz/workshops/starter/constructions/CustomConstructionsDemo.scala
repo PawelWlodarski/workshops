@@ -68,14 +68,6 @@ object CustomConstructionsDemo {
 
     //7)LOAN PATTERN
     println("*** LOAN PATTERN ***")
-    class CustomConnection{
-      def open():Unit=println("openning connection...")
-      def close():Unit=println("closing connection...")
-      def query(q:String):List[String]={
-        println(s"sending query :  $q")
-        List("result1","result2")
-      }
-    }
 
     def withConnection(c:CustomConnection)(operation : CustomConnection=>List[String]):List[String] = {
       try{
@@ -86,7 +78,7 @@ object CustomConstructionsDemo {
       }
     }
 
-    val resultLoan=withConnection(new CustomConnection()){c=>
+    val resultLoan=withConnection(new CustomConnection(List("result1", "result2"))){c=>
       c.query("select * from results")
     }
 
@@ -95,4 +87,13 @@ object CustomConstructionsDemo {
 
   }
 
+}
+
+class CustomConnection(results :List[String]) {
+  def open(): Unit = println("openning connection...")
+  def close(): Unit = println("closing connection...")
+  def query(q: String): List[String] = {
+    println(s"sending query :  $q")
+    results
+  }
 }
