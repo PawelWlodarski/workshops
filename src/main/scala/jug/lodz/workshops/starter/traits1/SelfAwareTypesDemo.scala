@@ -1,5 +1,6 @@
 package jug.lodz.workshops.starter.traits1
 
+//AKKA TestKit example
 object SelfAwareTypesDemo {
 
   def main(args: Array[String]): Unit = {
@@ -9,6 +10,9 @@ object SelfAwareTypesDemo {
 
     staticClockLogger.debug("Static logger example")
     randomClockLogger.debug("Random Logger example")
+
+    //show error
+    //val error=new DateLogger {}
   }
 
 }
