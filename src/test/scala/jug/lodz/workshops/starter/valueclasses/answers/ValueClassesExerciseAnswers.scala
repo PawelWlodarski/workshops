@@ -2,11 +2,13 @@ package jug.lodz.workshops.starter.valueclasses.answers
 
 import org.scalatest.{MustMatchers, WordSpec}
 
+import scala.collection.immutable.Seq
+
 class ValueClassesExerciseAnswers extends WordSpec with MustMatchers{
 
   "Define domain objects factory" should {
     "should be defined for Item" in {
-      val item: Item = Item("name", "description")
+      val item: Item = Item(1,"name", "description")
 
       item.name mustBe "name"
       item.description mustBe "description"
@@ -19,7 +21,7 @@ class ValueClassesExerciseAnswers extends WordSpec with MustMatchers{
     }
 
     "should be defined for Purchase" in {
-      val p:Purchase=Purchase(1,Item("item1","desc1"),Amount(11))
+      val p:Purchase=Purchase(1,Item(1,"item1","desc1"),Amount(11))
 
       p.id  mustBe a[PurchaseId]
       p.item.name mustBe "item1"
@@ -28,11 +30,33 @@ class ValueClassesExerciseAnswers extends WordSpec with MustMatchers{
 
   "Database" should {
     "be initiated" in {
-      val ids=Database.selectAll.map{case (id,purchase) => id.value}
-      val names=Database.selectAll.map{case (id,purchase) => purchase.item.name}
+      val ids=Database.selectAll.map{case (id,_) => id}
+      val names=Database.selectAll.map{case (_,purchase) => purchase.item.name}
 
-      ids must contain allOf(1,2,3,4,5)
-      names must contain allOf("item1","item2","item3","item4","item5")
+      ids must contain allOf(1,2,3,4)
+      names must contain allOf("item1","item2","item3","item4")
+    }
+  }
+
+  "Safe Dao" should {
+    "find purchase" in {
+      val dao=new SafeDao
+      val pid=new PurchaseId(1)
+      val result: Option[Purchase] =dao.findPurchase(pid)
+
+      result must not be empty
+      result.get.id.value mustBe 1
+      result.get.amount.value mustBe 7
+    }
+
+    "find all purchases with item" in {
+      val dao=new SafeDao
+      val iid=new ItemId(3)
+
+      val result: Seq[Purchase] =dao.findPurchaseWithItem(iid)
+
+      result.size mustBe 2
+
     }
   }
 
