@@ -3,7 +3,7 @@ package jug.lodz.workshops.starter.traits2.answers
 object LinearizationAnswers {
 
   class Auth(val login:String,val  password:String)
-  class Request(val url:String,val browser:String,val location:String,auth:Auth){
+  class Request(val url:String,val browser:String,val location:String,val auth:Auth){
     def login=auth.login
     def password=auth.password
   }
@@ -26,6 +26,20 @@ object LinearizationAnswers {
     def forbidden(url:String)=new Response(s"Page $url is forbidden.",403)
   }
 
+  //EXERCISE2
+  trait LocationFilter extends Controller{
+    abstract override def handle(r: Request): Response = {
+      if(r.location == "BANNED_COUNTRY") ShopController.forbidden(r.url)
+      else super.handle(r)
+    }
+  }
+
+  trait LocationMaskingFilter extends Controller{
+    abstract override def handle(r: Request): Response = {
+      val newRequest=new Request(r.url,r.browser,"MASKED",r.auth)
+      super.handle(newRequest)
+    }
+  }
 
 
   //EXERCISE3
