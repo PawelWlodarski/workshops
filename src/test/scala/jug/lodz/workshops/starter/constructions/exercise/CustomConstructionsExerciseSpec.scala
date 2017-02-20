@@ -49,6 +49,7 @@ class CustomConstructionsExerciseSpec extends FlatSpec with Matchers {
 
   //UNCOMMENT AND FIX
 //  "high order methods" should "receive function as parameter" in {
+  // you need to compose function with itself by applying arg to the first invocation
 //    def composeTwice(arg:Int,f:Int=>Int):Int = ???
 //    def composeTwiceSeparated ???
 //
@@ -63,6 +64,8 @@ class CustomConstructionsExerciseSpec extends FlatSpec with Matchers {
 //  }
 
   //FIX METHOD FIXTURE
+  //you need to create a map with values expected by test below
+  //and after that pass it to 'test' function similarly to the 'withConnection' example at the top of this file
   def withSomeMap(test:Map[Int,String]=>Any): Unit = ???
 
   it should "use fixture" in withSomeMap{map=>
@@ -73,6 +76,7 @@ class CustomConstructionsExerciseSpec extends FlatSpec with Matchers {
 
   "custom while" should "be implemented" in {
     //FIX FUNCTION DECLARATION
+    //implement only with one 'if' , don't use scala 'while'
     def customWhile(condition:  => Boolean)(logic: =>Unit):Unit = ???
 
     var i=4
