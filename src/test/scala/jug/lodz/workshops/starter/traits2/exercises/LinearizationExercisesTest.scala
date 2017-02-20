@@ -1,4 +1,4 @@
-package jug.lodz.workshops.starter.jug.lodz.workshops.starter.traits2.exercises
+package jug.lodz.workshops.starter.traits2.exercises
 
 import jug.lodz.workshops.starter.traits2.exercises.LinearizationExercises._
 import org.scalatest.{MustMatchers, WordSpec}

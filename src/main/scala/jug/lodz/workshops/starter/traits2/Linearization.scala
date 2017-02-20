@@ -5,6 +5,7 @@ object Linearization {
   def main(args: Array[String]): Unit = {
     println("\n *** traits linearization *** \n")
 
+    //DIFFERENT ORDER OF TRAITS MATTER
     val abStream = new BaseStream with StreamA with StreamB
     val baStream = new BaseStream with StreamB with StreamA
 
@@ -13,6 +14,7 @@ object Linearization {
 
     println("\n *** traits linearization with Inheritence*** \n")
 
+    //REPETITIONS ARE REMOVED
     val cbaStream = new BaseStream with StreamC with StreamB with StreamA
     println("  CBA : "+cbaStream.method)
 
