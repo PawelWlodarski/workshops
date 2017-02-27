@@ -66,10 +66,7 @@ object GenericsDemo {
     arrayString(0)="zzz"
     println(arrayString.mkString(","))
 
-    //exercise - implement generic pair
-    //exercise - implement def getPath(:Class[???]) : String
-    //exercise - implement option
-    //exercise b - option with map
+    //exercise - covariant option with map
 
   }
 
