@@ -1,5 +1,6 @@
 package jug.lodz.workshops.starter.patternmatching1
 
+// * Show case class bytecode
 object PatternMatching1Demo {
 
   def main(args: Array[String]): Unit = {
@@ -62,15 +63,30 @@ object PatternMatching1Demo {
     }
 
 
-    //ZADANIA -> KALKULATOR
-    /**
-      * abstract class Expr
-case class Var(name: String) extends Expr
-case class Number(num: Double) extends Expr
-case class UnOp(operator: String, arg: Expr) extends Expr
-case class BinOp(operator: String,
-left: Expr, right: Expr) extends Expr
-      */
+    // *****  pattern matching exception **************
+
+//    val s="value"
+//
+//    s match {
+//      case "something else" => println("this should throw an exception")
+//    }
+
+    // Capital letters X or `x`
+
+    //@switchTable
+    println(" *** @switch ***")
+
+    val i:Any=9
+
+    import scala.annotation.switch
+
+    (i: @switch) match {
+      case 9 => println("9")
+        //uncomment to check warning
+//      case SimpleCaseClass(value) => println(s"value from simple case class = $value")
+      case _ => println("other")
+    }
+
   }
 
 }
