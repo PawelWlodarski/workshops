@@ -40,11 +40,6 @@ object ExtractorsDemo {
     }
   }
 
-
-  //exercises
-  // email extractor
-  //def unapply(str: String): Option[(String, String)]
-  //snapshot extractor
   // is email from domain : Domain("com"
 }
 
