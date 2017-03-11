@@ -1,4 +1,4 @@
-package jug.lodz.workshops.starter.patternmatching2.answers
+package jug.lodz.workshops.starter.patternmatching2.exercises
 
 import org.scalatest.{MustMatchers, WordSpec}
 
@@ -75,10 +75,7 @@ class PatternMatching2Answers extends WordSpec with MustMatchers {
 
 //EXERCISE1
 object EmailExtractor {
-  def unapply(mail: String): Option[(String, String)] = {
-    val parts = mail.split("@")
-    if (parts.length == 2) Some(parts(0), parts(1)) else None
-  }
+  def unapply(mail: String): Option[(String, String)] = ???
 }
 
 //EXERCISE2
@@ -91,9 +88,7 @@ class StateHistory {
 }
 
 object StateHistory {
-  def unapply(state: StateHistory): Option[Int] =
-    if (state.history.isEmpty) None
-    else Some(state.history.reduce((a, b) => a + b))
+  def unapply(state: StateHistory): Option[Int] = ???
 }
 
 //Exercise3
@@ -106,6 +101,6 @@ class Basket{
 }
 
 object Basket{
-  def unapply(b:Basket) : Boolean = b.purchased.length > 0
-  def process(b:Basket) : String =  s"processed ${b.purchased.length} products"
+  def unapply(b:Basket) : Boolean = ???
+  def process(b:Basket) : String =  ???
 }
