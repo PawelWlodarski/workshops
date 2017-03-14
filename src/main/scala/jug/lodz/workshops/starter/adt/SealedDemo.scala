@@ -10,7 +10,7 @@ object SealedDemo {
     example match {
       case Implementation1(number) => println(s"number=$number")
       case OtherImplementation(text) => println(s"tekst=$text")
-//      case UniqueSubtype => println("unique") //show and explain warning
+      case UniqueSubtype => println("unique") //show and explain warning
     }
 
     println(" *** closed/closed principle")
@@ -25,12 +25,6 @@ object SealedDemo {
     println(s"result2 : $result2")
 
   }
-
-  //exercises
-  //ADT Errors
-  //ADT Try
-  //ADT Number
-
 }
 
 //DIFFERENT CONSTRUCTORS SO MORE POWERFUL THAN ENUM!!!
