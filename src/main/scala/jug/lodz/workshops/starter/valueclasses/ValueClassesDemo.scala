@@ -47,6 +47,7 @@ class DomainUser(val id: UserId, val age: Age, val salary: Salary){
   override def toString = s"DomainUser(id=${id.value}, age=${age.number}, salary=${salary.amount})"
 }
 
+// EXPLAIN WHY ANYVAL IS NEEDED!!
 object Extensions{
   implicit class StringExtensions(base:String){
     def display=println(s"Extension : $base")

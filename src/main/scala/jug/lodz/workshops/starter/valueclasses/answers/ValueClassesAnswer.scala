@@ -57,7 +57,6 @@ trait DataCache extends SafeDao{
   private var cached:Map[PurchaseId,Purchase] = Map()
 
   override def findPurchase(pid: PurchaseId): Option[Purchase] ={
-    super.findPurchase(pid)
     val result=cached.get(pid).orElse(super.findPurchase(pid))
     result.foreach(p=>cached = cached + (pid -> p))
     result
