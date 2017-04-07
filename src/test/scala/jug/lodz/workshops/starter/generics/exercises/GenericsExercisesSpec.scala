@@ -1,6 +1,5 @@
 package jug.lodz.workshops.starter.generics.exercises
 
-import jug.lodz.workshops.starter.generics.GenericsDemo
 import org.scalatest.{MustMatchers, WordSpec}
 
 class GenericsAnswersSpec extends WordSpec with MustMatchers{
@@ -54,7 +53,7 @@ class GenericsAnswersSpec extends WordSpec with MustMatchers{
 //    }
 //  }
 
-  //UNCOMMENt AND FIX EXERCISE2
+  //UNCOMMENT AND FIX
 //  "EXERCISE4 " should {
 //    "create covariant Some" in {
 //      val option:CovariantOption[AnyVal]=CovariantSome(15)
@@ -117,18 +116,18 @@ sealed trait InvariantOption[A]{
 sealed trait CovariantOption[+A]{
   def isEmpty : Boolean
   //EXERCISE5 - super hard - use Upper bounds
-  //def getOrElse[B >: A](other:B):B
+  //def getOrElse[???](other:B):B
 }
 
 //case object CovariantNone extends CovariantOption[???]{
 //
-//  override def isEmpty: Boolean = true
+//  override def isEmpty: Boolean = ???
 //  //EXERCISE5
-//  //override def getOrElse[A](other: A): A = other
+//  //override def getOrElse[???](other: A): A = other
 //}
 //
 //case class CovariantSome[???](a:???) extends CovariantOption[???]{
 //  override def isEmpty: Boolean = ???
 //  //EXERCISE5
-//  //override def getOrElse[B >: A](other: B): B = a
+//  //override def getOrElse[???](other: B): B = a
 //}

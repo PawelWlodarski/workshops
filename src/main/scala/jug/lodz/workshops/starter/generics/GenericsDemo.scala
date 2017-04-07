@@ -42,13 +42,13 @@ object GenericsDemo {
     println(s" **** sum list $sum")
 
     class CovariantWrapper[+A](element:A){
-      def modify[B](f:A=>B):Wrapper[B] = new Wrapper[B](f(element))
+      def modify[B](f:A=>B):CovariantWrapper[B] = new CovariantWrapper[B](f(element))
     }
 
     val cw=new CovariantWrapper[Int](100)
     val anyWrapper:CovariantWrapper[Any]=cw
 
-    val covariantWrapperResult: Wrapper[String] =anyWrapper.modify(_.toString)
+    val covariantWrapperResult: CovariantWrapper[String] =anyWrapper.modify(_.toString)
 
     println("\n **** HIGH KINDED TYPES ****")
     def printEither(e:Either[String,Int]) = println("printing either : "+e)
