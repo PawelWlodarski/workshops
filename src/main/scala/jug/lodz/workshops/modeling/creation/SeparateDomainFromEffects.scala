@@ -78,6 +78,17 @@ object SeparateDomainFromEffects{
   val display1b: Try[Message] =safeRead(rawInput).map(createMoney andThen displayAccount)
   sideEffectAwareBorderMethod(display1b)
 
+  title("[TECHNIQUE] => currying - Dependency Injection in FP")
+
+  type Tax = Double
+
+  val calculateTax : Tax => Money => Money = tax => m => m+ (m*tax)
+  val calculateGross =  calculateTax(0.19)
+  val calculateVat =  calculateTax(0.23)
+
+  section("gross 100",calculateGross(100))
+  section("gross 100 + vat",(calculateGross andThen calculateVat)(100))
+
   }
 
 }
