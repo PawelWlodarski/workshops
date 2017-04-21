@@ -1,4 +1,4 @@
-package jug.lodz.workshops.modeling.creation.answers
+package jug.lodz.workshops.modeling.creation.exercises
 
 import java.util.concurrent.TimeUnit
 
@@ -7,7 +7,7 @@ import org.scalatest.{MustMatchers, WordSpecLike}
 import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.util.{Failure, Success, Try}
 
-class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
+class SeparateDomainFromEffectsExercises extends WordSpecLike with MustMatchers {
 
   //Option represent potential missing of value
   //in java for example when you want to retrieve value from map and it is not there -
@@ -27,11 +27,11 @@ class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
       }
 
       val getSalary: User => Salary = u => u.salary
-      val createMessage: Salary => String = s => s"SALARY : $s" //exercise
+      val createMessage: Salary => String = ??? //exercise
 
       val effectFunction: Option[Report] => String = { //exercise
-        case Some(m) => s"RESULT : $m"
-        case None => "NOT ENOUGH DATA"
+        case Some(m) => ???
+        case None => ???
       }
 
       createMessage(50) mustBe "SALARY : 50"
@@ -53,32 +53,29 @@ class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
         "taxes.gross" -> 0.19
       }
 
-      val calculateGross: Money => Tax => Money = input => tax => input + (input * tax) //exercise
+      val calculateGross: Money => Tax => Money = ??? //exercise
       val input: Money = 10.0
 
       val tax: Option[Tax] = config.get("taxes.gross")
 
-      val toDecimalFormat: Option[Money] => BigDecimal = { //exercise
-        case Some(result) => BigDecimal(result)
-        case None => BigDecimal(0)
-      }
+      val toDecimalFormat: Option[Money] => BigDecimal = ??? //exercise
 
       toDecimalFormat(tax.map(calculateGross(input))) mustBe BigDecimal(11.9)
       toDecimalFormat(config.get("not.existing").map(calculateGross(input))) mustBe BigDecimal(0)
     }
 
-    //swap exercise - HARD BONUS
+    //swap exercise - BONUS
     //Money => Tax =>  Money from previous exercise is less usable than Tax => Money =>  Money
     //because injecting tax give us more usability than injecting concrete sum first
     //write swap high kind method to change places of arguments
     "swap arguments" in {
-      def swap[A, B, C](f: A => B => C): B => A => C =
-        b => a => f(a)(b)
+      def swap[A, B, C](f: A => B => C): B => A => C = ??? //exercise
+
 
       type Money = Double
       type Tax = Double
 
-      val calculateGross: Tax => Money => Money = tax => input => input + (input * tax) //exercise
+      val calculateGross: Tax => Money => Money = ??? //exercise
 
       val swappedGross: Money => Tax => Money = swap(calculateGross)
       val m: Money = 100
@@ -101,10 +98,10 @@ class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
 
       "add two effects by pattern matching" in {
         def add(i1: Try[Int], i2: Try[Int]): Try[Int] = (i1, i2) match {
-          case (Success(a), Success(b)) => Success(a + b)
-          case (Success(a), f: Failure[_]) => f
-          case (f: Failure[_], Success(b)) => f
-          case (f, _) => f
+          case (Success(a), Success(b)) => ???
+          case (Success(_), f: Failure[_]) => ???
+          case (f: Failure[_], Success(b)) => ???
+          case (f, _) => ???
         }
 
         val i1 = HexParser.parseHex("A")
@@ -126,8 +123,8 @@ class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
         val i2 = HexParser.parseHex("B")
         val i3 = HexParser.parseHex("Z")
         //attempt1
-        val r1: Try[Try[Int]] = i1.map(v1 => i2.map(v2 => pure(v1, v2)))
-        val r2: Try[Try[Int]] = i1.map(v1 => i3.map(v3 => pure(v1, v3)))
+        val r1: Try[Try[Int]] = i1.map(v1 => i2.map(v2 => ???))
+        val r2: Try[Try[Int]] = i1.map(v1 => ???)
 
         r1 mustBe Success(Success(21))
         r2.isSuccess mustBe true
@@ -135,8 +132,8 @@ class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
 
         val r3 = i1.map { v1 =>
           i2 match {
-            case Success(v2) => pure(v1, v2)
-            case Failure(_) => 0 //we should fail but how?
+            case Success(v2) => ???
+            case Failure(_) => ??? //we should fail but how?
           }
         }
 
@@ -156,18 +153,13 @@ class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
         val i2 = HexParser.parseHex("B")
         val i3 = HexParser.parseHex("Z")
 
-        Apply[Try].map2(i1, i2)(pure) mustBe Success(21)
-        Apply[Try].map2(i1, i3)(pure).isFailure mustBe true
+        Apply[Try].map2(???, ???)(???) mustBe Success(21)
+        Apply[Try].map2(???, ???)(???).isFailure mustBe true
       }
 
       //write map2 yourself to see that it is not magic
       "write map2 yourself" in {
-        def map2[A, B, C](a: Try[A], b: Try[B])(f: (A, B) => C): Try[C] = (a, b) match {
-          case (Success(a), Success(b)) => Success(f(a, b))
-          case (Success(a), f: Failure[_]) => f.asInstanceOf[Try[C]]
-          case (f: Failure[_], Success(b)) => f.asInstanceOf[Try[C]]
-          case (f, _) => f.asInstanceOf[Try[C]]
-        }
+        def map2[A, B, C](a: Try[A], b: Try[B])(f: (A, B) => C): Try[C] = ???
 
         def pure(a: Int, b: Int) = a + b
 
@@ -182,7 +174,8 @@ class SeparateDomainFromEffectsAnswers extends WordSpecLike with MustMatchers {
     }
 
 
-    //exercise Future
+    //compose business campaign when values will be available in the future
+    //EXERCISE : complete Exercise3Module
     "EXERCISE3" should {
       "assembly domain operation from async operation" in {
           import Exercise3Module._
@@ -253,19 +246,16 @@ object Exercise3Module{
   case class Customer(name:String,email:String,purchases:List[Purchase])
 
 
-  val purchaseAboveCampaign : Price => CampaignQualifier = minimalProductPrice => customer =>
-    customer.purchases.exists(_.price > minimalProductPrice)
+  val purchaseAboveCampaign : Price => CampaignQualifier = ??? //exercise
 
-  val getEmail : Customer => Email = _.email
-  val getName : Customer => String = _.name
+  val getEmail : Customer => Email = ??? //exercise
+  val getName : Customer => String = ??? //exercise
 
   import Exercise3FunctionalLibrary._
   val emailInfo: (Customer) => (Email, String) = zip(getEmail,getName)
 
 
-  val writePromotionalEmail : ((Email,String)) => String = {
-    case (e,n) => s"TO : $e; Dear $n (...)"
-  }
+  val writePromotionalEmail : ((Email,String)) => String = ??? //exercise
 }
 
 object Exercise3FunctionalLibrary{
