@@ -87,6 +87,7 @@ class SeparateDomainFromEffectsExercises extends WordSpecLike with MustMatchers 
 
     // in this exercise we will train work on multiple effects
     // we will use cryptography domain - usable in IoT and such things
+    //TEST IS READY - IMPLEMENT HEX PARSER OBJECT AT THE BOTTOM OF THIS FILE
     "EXERCISE2" should {
       "create safe hex converter" in {
 
@@ -201,9 +202,8 @@ class SeparateDomainFromEffectsExercises extends WordSpecLike with MustMatchers 
 }
 
 object HexParser {
-  def parseHex(s: String): Try[Int] = Try { //exercise
-    Integer.parseInt(s, 16)
-  }
+  //exercise - use Integer.parseInt(_,16) to convert to hex
+  def parseHex(s: String): Try[Int] = ???
 }
 
 object Database{

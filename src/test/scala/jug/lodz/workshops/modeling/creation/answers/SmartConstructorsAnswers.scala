@@ -58,11 +58,72 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
 
   }
 
+  import Accounts._
+
   "EXERCISE3" should {
     "create specific account" in {
-        ///map2
-        // compose effect
+
+      Money.dollars(20).map(newAccount).get mustBe a[Standard]
+      Money.dollars(200).map(newAccount).get mustBe a[Premium]
+      Money.dollars(-10).map(newAccount) mustBe a[Failure[_]]
     }
+
+
+    "test transaction" in {
+      //prepared data, can be safely obtain from effect
+      val amountToTransfer=Money.dollars(100).get
+      val a1: Account =Money.dollars(200).map(newAccount).get
+      //also we could use package private constructors
+      val a2: Account =Standard(new AccountId(2),Money.dollars(50).get)
+
+      val result=transaction(a1,a2,amountToTransfer)
+
+      result mustBe Success(Transaction(new AccountId(1),new AccountId(2),amountToTransfer))
+    }
+
+
+    "Perform unsuccessfull composition with map2" in {
+      import cats.Apply
+      import cats.instances.try_._
+      val t1=Money.dollars(200).map(newAccount)
+      val t2=Money.dollars(20).map(newAccount)
+      val amountToTransfer=Money.dollars(100)
+      val r1: Try[Try[Transaction]] =Apply[Try].map3(t1,t2,amountToTransfer){ (a1, a2, m) =>
+        transaction(a1,a2,m)
+      }
+      //or just
+      val r2: Try[Try[Transaction]] =Apply[Try].map3(t1,t2,amountToTransfer)(transaction)
+
+      //embedded type
+      r1 mustBe a[Success[_]]
+      r1.get mustBe a[Success[_]]
+      r1.get.get mustBe a[Transaction]
+
+      r2.get.get mustBe a[Transaction]
+    }
+
+    import FunctionalLibrary._
+
+    "flatten effects" in {
+
+    }
+
+    //DEPENDANT EFFECTS
+    "compose dependent effects 1 - TUPLE" in {
+        def intoTuple[A,B](a:A)(b:B) : (A,B) = (a,b)
+        val t1=Money.dollars(200).map(newAccount)
+        val t2=Money.dollars(20).map(newAccount)
+
+        val tryTuple: Try[(Account, Account)] =flatMap(t1)(v1=>t2.map(v2=>(v1,v2)))
+
+        tryTuple.get mustBe a[(_,_)]
+
+    }
+
+    "compose dependent effects 2 Transaction/Failed Transaction" in {
+
+    }
+
   }
 }
 
@@ -111,11 +172,6 @@ object TaxInRange {
 
 }
 
-
-
-
-
-
 //EXERCISE 2 recall relation beteen class and companion object
 class HexType private(private val bytes:Array[Byte]){
 
@@ -140,26 +196,64 @@ object HexType{
 
 
 //EXERCISE3 - Account
-object Accounts{
-  class InterestRate private[Accounts](val value:Double) extends AnyVal
-  class Money private[Accounts](val value:Double) extends AnyVal
-  class AccountId private[Accounts](val value:Int) extends AnyVal
 
-  final case class Standard(m:Money) extends Account(generateId,standardInterestRate,m)
-  final case class Premium(m:Money) extends Account(generateId,premiumInterestRate,m)
+object Accounts{
+  //factory state
+  private val accountsCounter=new AtomicInteger(1)
+  private val premiumAccountDebit=new Money(50)
+
+  //Domain types
+  class AccountId private[answers](val value:Int) extends AnyVal
+  class Money private[answers](val value:Double) extends AnyVal{
+    override def toString: String = s"Money($value)"
+  }
+
+  object Money{
+    def dollars(d:Double):Try[Money] =
+      if(d>0) Success(new Money(d)) else Failure(new IllegalArgumentException(s"$d is not a money value"))
+  }
+
+  //Experience consequences of subtype polymorphism
+  sealed trait Account{
+    def id:AccountId
+  }
+
+  //package private access allow testing
+  final case class Standard private[answers](id:AccountId,m:Money) extends Account
+  final case class Premium private[answers](id:AccountId,m:Money, debit:Money) extends Account
+
   final case class Transaction(from:AccountId,to:AccountId,amount:Money)
 
-  private val standardInterestRate=new InterestRate(3.5)
-  private val premiumInterestRate=new InterestRate(7.5)
-  private val accountsCounter=new AtomicInteger(1)
 
   private def generateId=new AccountId(accountsCounter.getAndIncrement)
 
-  sealed abstract class Account(id:AccountId,ir:InterestRate,m:Money)
+  def newAccount(m:Money) : Account =
+    if(m.value>100) Premium(generateId,m,premiumAccountDebit)
+    else Standard(generateId,m)
 
 
-  def newAccount(m:Money) : Account = if(m.value>100) Premium(m) else Standard(m)
+  //is Try[Transaction] the best type here?
+  def transaction(a1:Account,a2:Account,amount:Money) : Try[Transaction] = a1 match {
+    case Premium(id,money,debit) =>
+      val allowedTransfer=new Money(money.value + debit.value)
+      transactionResult(allowedTransfer,amount,id,a2.id)
+    case Standard(id,money) =>
+      transactionResult(money,amount,id,a2.id)
+  }
 
-  def transaction(a1:Account,a2:Account) : Try[Transaction] = ???
+    //a1.m.value would be necessary with well defined Ordering or Eq - wait for type class workshops
+  private def transactionResult(available:Money,toTransfer:Money,id1:AccountId,id2:AccountId)=
+      if(available.value < toTransfer.value) Failure(new IllegalArgumentException(s"no sufficient funds"))
+      else Success(Transaction(id1,id2,toTransfer))
+
+}
+
+//EXERCISE3 -
+object FunctionalLibrary{
+
+  def flatMap[A,B](t:Try[A])(f:A=>Try[B]) : Try[B] = t match {
+    case Success(a) => f(a)
+    case f=> f.asInstanceOf[Try[B]]
+  }
 
 }

@@ -14,11 +14,12 @@ object SeparateDomainFromEffects{
 
     title("pure object function")
 
+    //TYPE ALIASES - improve readability
     type Input = Int
     type Money = BigDecimal
     type Message = String
 
-
+    //PURE FUNCTIONS - easy to use and compose
     val createMoney : Input => Money = i => BigDecimal(i)
     val displayAccount : Money => Message = m => s"account status : "+m
 
@@ -26,6 +27,7 @@ object SeparateDomainFromEffects{
 
     section("composed(3)",composed(3))
 
+    //PARTIAL FUNCTIONS - Reality
     title("real world problems")
     type RawInput = String
     val rawInput : String = "100"
@@ -34,7 +36,7 @@ object SeparateDomainFromEffects{
     val read : RawInput => Input = ri => ri.toInt
 
    section("read('100')",read(rawInput))
-  //   section("read('ab')",read(rawInput2))  -> exception
+  //   section("read('ab')",read(rawInput2))  -> exception  // SHOW
 
 
   //assumption without proof : exceptions break RT and introduces non determinism
@@ -83,8 +85,8 @@ object SeparateDomainFromEffects{
   type Tax = Double
 
   val calculateTax : Tax => Money => Money = tax => m => m+ (m*tax)
-  val calculateGross =  calculateTax(0.19)
-  val calculateVat =  calculateTax(0.23)
+  val calculateGross: (Money) => Money =  calculateTax(0.19)
+  val calculateVat: (Money) => Money =  calculateTax(0.23)
 
   section("gross 100",calculateGross(100))
   section("gross 100 + vat",(calculateGross andThen calculateVat)(100))
