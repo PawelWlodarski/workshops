@@ -4,6 +4,7 @@ import org.scalatest.{MustMatchers, WordSpec}
 
 class PatternMatching1Exercises extends WordSpec with MustMatchers {
 
+  //Complete  pattern matching defined at the bottom of the file
   "Exercise 1" should {
     "perform pattern matching on simple case class" in {
       import Exercise1._
@@ -14,6 +15,7 @@ class PatternMatching1Exercises extends WordSpec with MustMatchers {
     }
   }
 
+  //Complete  pattern matching defined at the bottom of the file
   "Exercise 2" should {
     "check type of passed expression" in {
       //short string -> length less than 5
@@ -32,6 +34,7 @@ class PatternMatching1Exercises extends WordSpec with MustMatchers {
     }
   }
 
+  //Complete  pattern matching defined at the bottom of the file
   "Exercise 3" should {
     "pattern match on complex expression" in {
       import Exercise3._
