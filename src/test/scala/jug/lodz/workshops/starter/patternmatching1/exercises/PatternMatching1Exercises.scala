@@ -2,7 +2,7 @@ package jug.lodz.workshops.starter.patternmatching1.exercises
 
 import org.scalatest.{MustMatchers, WordSpec}
 
-class PatternMatching1AnswersSpec extends WordSpec with MustMatchers {
+class PatternMatching1Exercises extends WordSpec with MustMatchers {
 
   "Exercise 1" should {
     "perform pattern matching on simple case class" in {
