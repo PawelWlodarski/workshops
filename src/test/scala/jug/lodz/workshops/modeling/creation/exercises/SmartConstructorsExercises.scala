@@ -1,4 +1,4 @@
-package jug.lodz.workshops.modeling.creation.answers
+package jug.lodz.workshops.modeling.creation.exercises
 
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -17,6 +17,8 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
       Salary.create(20) mustBe Some(Salary(20))
     }
 
+    //Complexte exercise 1B at the bottom of the file
+    //Function is curreid which means that it will not raise an exception when first element is only passed
     "create tax in range with config exceptions" in {
       val taxFactory: (Int) => Option[Tax] =Tax.inRange(10,50)
 
@@ -28,6 +30,7 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
     }
 
 
+    //This time we will validate range type before its creation
     "Create Tax with domain Range Object" in {
       val r: Option[TaxInRange.Range] =TaxInRange.createRange(10,50)
       val taxFactory: (Int) => Option[Tax] =TaxInRange.inRangeOption(r)
@@ -54,13 +57,19 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
 
       HexType.decode(input) mustBe Success(HexType createFrom Array(255.toByte) )
       HexType.decode("MIREK") mustBe a[Failure[_]]
+
+      val serialized: Try[String] =HexType.decode(input).map(HexType.serialize)
+      serialized mustBe Success("FF")
     }
+
 
   }
 
   import Accounts._
 
   "EXERCISE3" should {
+
+    //Implement Account factory creation
     "create specific account" in {
 
       Money.dollars(20).map(newAccount).get mustBe a[Standard]
@@ -69,6 +78,7 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
     }
 
 
+    //Complete 'transaction' method from the 'Accounts' module
     "test transaction" in {
       //prepared data, can be safely obtain from effect
       val amountToTransfer=Money.dollars(100).get
@@ -82,6 +92,7 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
     }
 
 
+    //First unsuccesssfull attempt to compose dependant effects
     "Perform unsuccessfull composition with map2" in {
       import cats.Apply
       import cats.instances.try_._
@@ -89,10 +100,10 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
       val t2=Money.dollars(20).map(newAccount)
       val amountToTransfer=Money.dollars(100)
       val r1: Try[Try[Transaction]] =Apply[Try].map3(t1,t2,amountToTransfer){ (a1, a2, m) =>
-        transaction(a1,a2,m)
+        transaction(???,???,???)
       }
       //or just
-      val r2: Try[Try[Transaction]] =Apply[Try].map3(t1,t2,amountToTransfer)(transaction)
+      val r2: Try[Try[Transaction]] =Apply[Try].map3(???,???,???)(???)
 
       //embedded type
       r1 mustBe a[Success[_]]
@@ -104,31 +115,29 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
 
     import FunctionalLibrary._
 
-    "flatten effects" in {
-
-    }
-
     //DEPENDANT EFFECTS
+    //implement flatMap method from FunctionalLibrary
     "compose dependent effects 1 - TUPLE" in {
-        def intoTuple[A,B](a:A)(b:B) : (A,B) = (a,b)
-        val t1=Money.dollars(200).map(newAccount)
-        val t2=Money.dollars(20).map(newAccount)
+      def intoTuple[A,B](a:A)(b:B) : (A,B) = (a,b)
+      val t1=Money.dollars(200).map(newAccount)
+      val t2=Money.dollars(20).map(newAccount)
 
-        val tryTuple: Try[(Account, Account)] =flatMap(t1)(v1=>t2.map(v2=>(v1,v2)))
+      val tryTuple: Try[(Account, Account)] =flatMap(t1)(v1=>t2.map(v2=>(v1,v2)))
 
-        tryTuple.get mustBe a[(_,_)]
+      tryTuple.get mustBe a[(_,_)]
 
     }
 
+    //compose Try[Account] and Try[Money] into Try[Transaction]
     "compose dependent effects 2 Transaction/Failed Transaction" in {
-      val t1: Try[Account] =Money.dollars(200).map(newAccount)
-      val t2: Try[Account] =Money.dollars(20).map(newAccount)
-      val amountToTransfer: Try[Money] =Money.dollars(100)
+      val t1: Try[Account] = ???
+      val t2: Try[Account] = ???
+      val amountToTransfer: Try[Money] = ???
 
       val result: Try[Transaction] =flatMap(t1){ a1 =>
         flatMap(t2){a2 =>
           amountToTransfer.flatMap{amount=>
-            transaction(a1,a2,amount)
+            ???
           }
         }
       }
@@ -144,25 +153,14 @@ class SmartConstructorsAnswers extends WordSpecLike with MustMatchers{
 case class Salary private (amount:Int)
 
 object Salary{
-  def create(amount: Int): Option[Salary] =
-    if(amount>0) Some(Salary(amount)) else None
+  def create(amount: Int): Option[Salary] = ???
 }
 
 //EXERCISE1B - TAX
 case class Tax private (amount : Int)
 
 object Tax{
-  def inRange(from:Int,to:Int)(value:Int) : Option[Tax] = {
-    require(from > 0 , "from must be greater than 0")
-    require(to <100, "to must be smaller than 100")
-    require(from < to, "from must be smaller than to")
-
-    if(value>=from && value <= to)
-      Some(Tax(value))
-    else
-      None
-
-  }
+  def inRange(from:Int,to:Int)(value:Int) : Option[Tax] = ???
 }
 
 
@@ -171,18 +169,12 @@ object TaxInRange {
     def contains(i:Int) : Boolean = i >= from && i<=to
   }
 
-  def createRange(from:Int,to:Int) : Option[Range] =
-    if(from <0 || to > 100 || from>to) None
-    else Some(Range(from,to))
+  def createRange(from:Int,to:Int) : Option[Range] = ???
+
+  def inRangeOption(r:Option[Range])(v:Int):Option[Tax] = ???
 
   def inRange(r:Range)(v:Int): Option[Tax] =
     if(r.contains(v)) Some(Tax(v)) else None
-
-  def inRangeOption(r:Option[Range])(v:Int):Option[Tax] = r match {
-    case Some(r) => inRange(r)(v)
-    case _ => None
-  }
-
 }
 
 //EXERCISE 2 recall relation beteen class and companion object
@@ -196,15 +188,12 @@ class HexType private(private val bytes:Array[Byte]){
 
 object HexType{
 
-  //smart constructor - more in level2
-  def decode(input:String) : Try[HexType] = Try{
-    val bytes=Hex.decodeHex(input.toCharArray)
-    new HexType(bytes)
-  }
+  // use Hex.decodeHex from apache codes
+  def decode(input:String) : Try[HexType] = ???
 
   def serialize(h:HexType): String = Hex.encodeHex(h.bytes,false).mkString
 
-  def createFrom(bytes: Array[Byte]) = new HexType(bytes)
+  def createFrom(bytes: Array[Byte]) = ???
 }
 
 
@@ -216,8 +205,8 @@ object Accounts{
   private val premiumAccountDebit=new Money(50)
 
   //Domain types
-  class AccountId private[answers](val value:Int) extends AnyVal
-  class Money private[answers](val value:Double) extends AnyVal{
+  class AccountId private[exercises](val value:Int) extends AnyVal
+  class Money private[exercises](val value:Double) extends AnyVal{
     override def toString: String = s"Money($value)"
   }
 
@@ -232,8 +221,8 @@ object Accounts{
   }
 
   //package private access allow testing
-  final case class Standard private[answers](id:AccountId,m:Money) extends Account
-  final case class Premium private[answers](id:AccountId,m:Money, debit:Money) extends Account
+  final case class Standard private[exercises](id:AccountId,m:Money) extends Account
+  final case class Premium private[exercises](id:AccountId,m:Money, debit:Money) extends Account
 
   final case class Transaction(from:AccountId,to:AccountId,amount:Money)
 
@@ -264,9 +253,6 @@ object Accounts{
 //EXERCISE3 -
 object FunctionalLibrary{
 
-  def flatMap[A,B](t:Try[A])(f:A=>Try[B]) : Try[B] = t match {
-    case Success(a) => f(a)
-    case f=> f.asInstanceOf[Try[B]]
-  }
+  def flatMap[A,B](t:Try[A])(f:A=>Try[B]) : Try[B] = ???
 
 }
