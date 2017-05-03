@@ -235,18 +235,8 @@ object Accounts{
 
 
   //is Try[Transaction] the best type here?
-  def transaction(a1:Account,a2:Account,amount:Money) : Try[Transaction] = a1 match {
-    case Premium(id,money,debit) =>
-      val allowedTransfer=new Money(money.value + debit.value)
-      transactionResult(allowedTransfer,amount,id,a2.id)
-    case Standard(id,money) =>
-      transactionResult(money,amount,id,a2.id)
-  }
+  def transaction(a1:Account,a2:Account,amount:Money) : Try[Transaction] = ???
 
-    //a1.m.value would be necessary with well defined Ordering or Eq - wait for type class workshops
-  private def transactionResult(available:Money,toTransfer:Money,id1:AccountId,id2:AccountId)=
-      if(available.value < toTransfer.value) Failure(new IllegalArgumentException(s"no sufficient funds"))
-      else Success(Transaction(id1,id2,toTransfer))
 
 }
 
