@@ -2,7 +2,7 @@ package jug.lodz.workshops.starter.adt.exercises
 
 import org.scalatest.{MustMatchers, WordSpecLike}
 
-class SealedTypesAnswers extends WordSpecLike with MustMatchers{
+class SealedTypesExercises extends WordSpecLike with MustMatchers{
   //complete code at the bottom of the class and run test
   "EXERCISE1" should {
     "create selaed trait for http statuses" in {
@@ -30,6 +30,7 @@ class SealedTypesAnswers extends WordSpecLike with MustMatchers{
   }
 
   //uncomment and complete code at the bottom of this file then run test
+  //You need to add subtypes to custom try
 //  "EXERCISE3" should {
 //    "simulate custom Try with ADTs" in {
 //      val success=CustomSuccess(5)

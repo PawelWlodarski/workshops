@@ -10,8 +10,10 @@ object SealedDemo {
     example match {
       case Implementation1(number) => println(s"number=$number")
       case OtherImplementation(text) => println(s"tekst=$text")
-      case UniqueSubtype => println("unique") //show and explain warning
+      case UniqueSubtype => println("unique") //comment out and explain warning
     }
+
+    //Show illegal inheritance in 'DifferentFile'
 
     println(" *** closed/closed principle")
     //new way of designing types
@@ -40,4 +42,4 @@ sealed abstract class MyOption[A]{
   }
 }
 final case class MySome[A](a:A) extends MyOption[A]
-final case class MyNone[A]() extends MyOption[A]  //to use objects we need understand more complex topics
+final case class MyNone[A]() extends MyOption[A]  //to use objects here we need understand more complex topics - generics covariance
