@@ -2,7 +2,7 @@ package jug.lodz.workshops.starter.patternmatching2.exercises
 
 import org.scalatest.{MustMatchers, WordSpec}
 
-class PatternMatching2Answers extends WordSpec with MustMatchers {
+class PatternMatching2Exercises extends WordSpec with MustMatchers {
 
   "EXERCISE1 " should {
     "extract email" in {

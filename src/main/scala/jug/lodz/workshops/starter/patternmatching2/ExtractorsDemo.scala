@@ -40,7 +40,6 @@ object ExtractorsDemo {
     }
   }
 
-  // is email from domain : Domain("com"
 }
 
 
