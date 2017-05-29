@@ -1,18 +1,16 @@
-package jug.lodz.workshops.starter.functions1.answers
+package jug.lodz.workshops.starter.functions1.exercises
 
 import org.scalatest.{MustMatchers, WordSpec}
 
 import scala.annotation.tailrec
 
-class TailRecursionAnswers extends WordSpec with MustMatchers{
+class TailRecursionExercises extends WordSpec with MustMatchers{
 
+  //FOR EACH EXERCISE UNCOMMENT @Tailrec
   "EXERCISE1" should {
     "Sum custom list of integers" in {
-      @tailrec
-      def sumList(list:CustomList,sum:Int=0):Int = list match {
-        case ListEnd => sum
-        case ListElem(e, tail) => sumList(tail,sum+e)
-      }
+      //@tailrec - UNCOMMENT FOR EXERCISe
+      def sumList(list:CustomList,sum:Int=0):Int = ???
 
       val l1=ListElem(1,ListElem(2,ListElem(3,ListEnd)))
       val l2=ListElem(15,ListElem(27,ListEnd))
@@ -54,20 +52,15 @@ case object ListEnd extends CustomList
 object Exercise2{
 
   def generate(element:Int,howMany:Int) : CustomList = {
-      @tailrec
-      def innerLoop(current:CustomList,howMany:Int) : CustomList =
-        if(howMany<=0) current
-        else innerLoop(ListElem(element,current),howMany-1)
+      //@tailrec - UNCOMMENT FOR EXERCISE
+      def innerLoop(current:CustomList,howMany:Int) : CustomList = ???
 
-    innerLoop(ListEnd,howMany)
+    innerLoop(???,???)
   }
 }
 
 
 object TailRecExercise3{
-  @tailrec
-  def reduceLeft(l:CustomList)(zero:Int)(f:(Int,Int)=>Int) : Int = l match {
-    case ListEnd => zero
-    case ListElem(a,tail) => reduceLeft(tail)(f(zero,a))(f)
-  }
+//  @tailrec - UNCOMMENT FOR EXERCISE
+  def reduceLeft(l:CustomList)(zero:Int)(f:(Int,Int)=>Int) : Int = ???
 }

@@ -3,7 +3,7 @@ package jug.lodz.workshops.starter.functions1.exercises
 import jug.lodz.workshops.starter.functions1.exercises.Exercise3.{DEBUG, ERROR, INFO}
 import org.scalatest.{MustMatchers, WordSpec}
 
-class HighOrderFunctionsAnswers extends WordSpec with MustMatchers {
+class HighOrderFunctionsExercises extends WordSpec with MustMatchers {
 
   //implement methods which are "factories" for functions
   "EXERCISE1" should {

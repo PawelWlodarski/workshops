@@ -50,7 +50,7 @@ object Functions1Demo {
       case i => -i
     }
 
-    //Function ineritence Function >: PartialFunction
+    //Function inheritence Function >: PartialFunction
     val abs2:Int=>Int = {
       case i if i>=0 => i
       case i => -i
