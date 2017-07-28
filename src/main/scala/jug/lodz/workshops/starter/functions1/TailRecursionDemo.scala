@@ -29,9 +29,3 @@ object TailRecursionDemo {
     internalLoop(n,0)
   }
 }
-
-
-//exercise
-// custom list -> sum
-// generate n element
-// iterate
