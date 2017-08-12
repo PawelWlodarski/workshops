@@ -1,6 +1,7 @@
 package jug.lodz.workshops.modeling.madyfication
 
 import jug.lodz.workshops.WorkshopDisplayer
+import monocle.function.Each
 import monocle.macros.GenLens
 import monocle.{Iso, Lens}
 
@@ -83,13 +84,27 @@ object LensesDemo extends WorkshopDisplayer{
 
     section("iso purchase set",isoComposed.set("{city:zakopane}")(purchase))
 
+    title("Traversable")
+    case class Class(students:List[String])
+    case class School(classes:List[Class])
 
-    import monocle.function.At.at
+    val c1=Class(List("student1","student2"))
+    val c2=Class(List("student3","student4"))
 
-    //e2 - security domain
-    //e3 - smart constructors
-    //e4 - custom lens implementation
-    //e4b - compose
+    val school=School(List(c1,c2))
+
+
+    val studentsLens=GenLens[Class](_.students)
+    val classesLens=GenLens[School](_.classes)
+
+//    val eachStudent=classesLens.composeTraversal(Each.each).composeLens(studentsLens).composeTraversal(Each.each)
+    //or
+    import monocle.function.Each._
+    val eachStudent=classesLens composeTraversal each composeLens studentsLens composeTraversal each
+
+    section("each student",eachStudent.getAll(school))
+
+
   }
 
   //Remind what AnyVal means
