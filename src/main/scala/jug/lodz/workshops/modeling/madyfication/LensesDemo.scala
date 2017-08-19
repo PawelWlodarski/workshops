@@ -1,7 +1,6 @@
 package jug.lodz.workshops.modeling.madyfication
 
 import jug.lodz.workshops.WorkshopDisplayer
-import monocle.function.Each
 import monocle.macros.GenLens
 import monocle.{Iso, Lens}
 
