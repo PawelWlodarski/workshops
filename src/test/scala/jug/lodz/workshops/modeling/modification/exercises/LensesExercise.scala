@@ -1,14 +1,14 @@
-package jug.lodz.workshops.modeling.madyfication.answers
+package jug.lodz.workshops.modeling.modification.exercises
 
-import jug.lodz.workshops.modeling.madyfication.answers.EXERCISE2Lib.CustomLens
 import monocle.function.Each
 import monocle.macros.GenLens
-import monocle.{Iso, Lens}
+import monocle.{Iso, Lens, PTraversal, Traversal}
 import org.scalatest.{MustMatchers, WordSpecLike}
 
-class LensesAnswers extends WordSpecLike with MustMatchers{
+class LensesExercise extends WordSpecLike with MustMatchers{
 
-  import LensesAnswerLibrary._
+  import LensesExerciseLibrary._
+  import EXERCISE2Lib._
 
   "EXERCISE1" should {
     "(a) create topic Lens in" in {
@@ -68,7 +68,7 @@ class LensesAnswers extends WordSpecLike with MustMatchers{
 
 }
 
-object LensesAnswerLibrary{
+object LensesExerciseLibrary{
   type MeetupTopic=String
 
 
@@ -83,30 +83,23 @@ object LensesAnswerLibrary{
 
 
   //EXERCISE1 - a
-  lazy val topicLens= Lens[Meetup,MeetupTopic](_.topic)(t=>m => m.copy(topic = t))
+  lazy val topicLens: Lens[Meetup, MeetupTopic] = ???
 
   //EXERCISE1 - b
-  lazy val addressLens = GenLens[Meetup](_.address)
-  lazy val streetLens = GenLens[Address](_.street)
-  lazy val streetTupleIso = Iso[Street,(String,Int)](s=>(s.name,s.number)){case (name,number)=>Street(name,number)}
+  lazy val addressLens: Lens[Meetup, Address] = ???
+  lazy val streetLens: Lens[Address, Street] = ???
+  lazy val streetTupleIso: Iso[Street, (String, Int)] = ???
 
 
   //EXERCISE1 - c
-  lazy val participantsLens=GenLens[Meetup](_.participants)
-  lazy val historyLens = GenLens[Member](_.history)
-  lazy val participantsTraversal = participantsLens.composeTraversal(Each.each).composeLens(historyLens)
+  lazy val participantsLens: Lens[Meetup, List[Member]] = ???
+  lazy val historyLens: Lens[Member, List[MeetupTopic]] = ???
+  lazy val participantsTraversal: Traversal[Meetup, List[MeetupTopic]] = ???
 
 }
 
 object EXERCISE2Lib{
   case class CustomLens[Outer,Inner](getter:Outer=>Inner,setter:Inner => Outer => Outer){
-    def composeCustomLens[Value](furtherLens:CustomLens[Inner,Value]) : CustomLens[Outer,Value] = {
-      val composedGetter : Outer => Value = this.getter andThen furtherLens.getter
-      val composedSetter : Value => Outer => Outer = value => outer => {
-        val changedInner=furtherLens.setter(value)(this.getter(outer))
-        this.setter(changedInner)(outer)
-      }
-      CustomLens(composedGetter,composedSetter)
-    }
+    def composeCustomLens[Value](furtherLens:CustomLens[Inner,Value]) : CustomLens[Outer,Value] = ???
   }
 }

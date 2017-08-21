@@ -1,4 +1,4 @@
-package jug.lodz.workshops.modeling.madyfication
+package jug.lodz.workshops.modeling.modification
 
 import jug.lodz.workshops.WorkshopDisplayer
 import monocle.macros.GenLens
