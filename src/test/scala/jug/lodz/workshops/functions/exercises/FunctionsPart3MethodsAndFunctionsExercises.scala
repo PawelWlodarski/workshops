@@ -162,11 +162,7 @@ class FunctionsPart3MethodsAndFunctionsExercises extends FunSuite with Matchers 
   // buffer += elem adds element to buffer
   def recFilter[A](l: List[A])(predicate: A => Boolean): List[A] = {
     def recFilterBuffer(l: List[A], buffer: ListBuffer[A]): List[A] = {
-      if (l.isEmpty) buffer.toList
-      else {
-        val newBuffer = if (predicate(l.head)) buffer += l.head else buffer
-        recFilterBuffer(l.tail, newBuffer)
-      }
+      ???
     }
 
     recFilterBuffer(l, ListBuffer())

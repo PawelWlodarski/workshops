@@ -1,6 +1,8 @@
 val cats = "org.typelevel" %% "cats" % "0.8.1"
 val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1" % "test"
 val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.13.4" % "test"
+val junit = "junit" % "junit" % "4.12" % "test"
+val assertj = "org.assertj"%"assertj-core"%"3.8.0"
 
 val commonsCodec = "commons-codec" % "commons-codec" % "1.10" // for data transformation exercises
 
@@ -21,6 +23,7 @@ val root = (project in file("."))
   libraryDependencies ++= Seq(
     cats,
     commonsCodec,
-    scalaTest, scalaCheck
+    scalaTest, scalaCheck,
+    junit,assertj
   )
   ).settings(libraryDependencies ++= monocles)
