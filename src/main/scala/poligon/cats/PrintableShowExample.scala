@@ -1,6 +1,10 @@
 package poligon.cats
 
-object PrintableExample {
+import cats.Show
+import cats._
+import cats.implicits._
+
+object PrintableShowExample {
 
   trait Printable[A]{
     def format(a:A):String
@@ -40,6 +44,8 @@ object PrintableExample {
 
   final case class Cat(name: String, age: Int, color: String)
 
+  implicit val catsShow:Show[Cat]=Show.show(cat => s"kot ${cat.name}")
+
 
   def main(args: Array[String]): Unit = {
     import PrintableInstances._
@@ -47,7 +53,7 @@ object PrintableExample {
 
     val c=Cat("Roman",20,"black")
 
-    c.print
+    println(c.show)
   }
 
 }
