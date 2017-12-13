@@ -1,7 +1,6 @@
 package poligon.cats
 
 import cats.Show
-import cats._
 import cats.implicits._
 
 object PrintableShowExample {
@@ -42,7 +41,7 @@ object PrintableShowExample {
   }
 
 
-  final case class Cat(name: String, age: Int, color: String)
+
 
   implicit val catsShow:Show[Cat]=Show.show(cat => s"kot ${cat.name}")
 
