@@ -25,3 +25,15 @@ object Cat{
   val cat1=Cat("Garfield", 38, "orange and black")
   val cat2=Cat("Heathcliff", 32, "orange and black")
 }
+
+final case class Order(totalCost: Double, quantity: Double)
+
+object Order{
+  import cats.Monoid
+
+  implicit val orderMonoid=new Monoid[Order]{
+    override def empty: Order = Order(0,0)
+
+    override def combine(x: Order, y: Order): Order = Order(x.totalCost+y.totalCost,x.quantity+y.quantity)
+  }
+}
