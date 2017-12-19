@@ -25,5 +25,6 @@ val root = (project in file("."))
     commonsCodec,
     scalaTest, scalaCheck,
     junit,assertj
-  )
-  ).settings(libraryDependencies ++= monocles)
+  ))
+  .settings(libraryDependencies ++= monocles)
+  .settings(scalacOptions += "-Ypartial-unification")
