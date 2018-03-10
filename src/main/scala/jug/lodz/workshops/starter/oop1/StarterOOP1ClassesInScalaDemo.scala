@@ -7,7 +7,7 @@ object StarterOOP1ClassesInScalaDemo {
 
     //DECLARING JAVA CLASS
     //CODE: EXPLAIN TYPE POSITION AND INTERFERENCE (remove type)
-    val userJava:UserJava=new UserJava("Zdzislawa", 25)  //no semicolon
+    val userJava:UserJava=new UserJava("John", 25)  //no semicolon
 
 //    userJava=new UserJava("Stanislaw", 30) ILLEGAL, reasignment to 'val' -> CODE; change to var
 
@@ -16,7 +16,7 @@ object StarterOOP1ClassesInScalaDemo {
     //CODE : create equivalent scala class- ScalaUser at the bottom of the file
 
     //TOME : show javap source ,
-    val scalaUser: UserScala =new UserScala("Bogumila",18)
+    val scalaUser: UserScala =new UserScala("Maria",18)
 
     println(s"\n *** Displaying scala class : $scalaUser")
 
