@@ -9,7 +9,7 @@ object Robots1 {
 
     def isAlive : Boolean = ???
 
-    def hit(damage:Int):Unit = ???
+    def takeHit(damage:Int):Unit = ???
 
     def energyStatus:Int = ???
   }
@@ -31,11 +31,11 @@ class Robot1Test extends FunSuite with MustMatchers {
   test("hit robot"){
     val robot=new Robots1.Robot1(100)
 
-    robot.hit(30)
+    robot.takeHit(30)
     val firstEnergystatus=robot.energyStatus
-    robot.hit(45)
+    robot.takeHit(45)
     val secondEnergystatus=robot.energyStatus
-    robot.hit(100)
+    robot.takeHit(100)
     val thirdEnergystatus=robot.energyStatus
 
     firstEnergystatus mustBe 70
