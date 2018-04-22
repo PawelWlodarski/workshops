@@ -39,7 +39,6 @@ object Robots3 {
 
     def energyStatus:Int = energy
 
-    //between 0-25
     def punch : Int = punchGenerator.generatePunch()
 
   }

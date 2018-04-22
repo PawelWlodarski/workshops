@@ -65,7 +65,6 @@ object Robots5 {
 
     val takeHit : Int => Unit = absorb andThen reduceEnergy
 
-    //between 0-25
     def punch : Int = punchGenerator.generatePunch()
 
   }
