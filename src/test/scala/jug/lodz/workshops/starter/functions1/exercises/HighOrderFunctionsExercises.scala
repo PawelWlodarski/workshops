@@ -1,6 +1,5 @@
 package jug.lodz.workshops.starter.functions1.exercises
 
-import jug.lodz.workshops.starter.functions1.answers.Exercise4
 import jug.lodz.workshops.starter.functions1.exercises.Exercise3.{DEBUG, ERROR, INFO}
 import org.scalatest.{MustMatchers, WordSpec}
 
@@ -10,6 +9,8 @@ class HighOrderFunctionsExercises extends WordSpec with MustMatchers {
   "EXERCISE1" should {
     "return functions from methods" in {
       def createAddPrefix(prefix: String): String => String = ???
+
+      //comparator checks if passed parameter is greater than constant
       def createComparatorToConstant(constant: Int): Int => Boolean = ???
 
 
