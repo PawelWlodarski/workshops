@@ -55,6 +55,25 @@ class HighOrderFunctionsAnswers extends WordSpec with MustMatchers {
     }
   }
 
+
+  "EXERCISE4" should {
+    "created curried and ucurried" in {
+        val addInts: (Int,Int) => Int = (i1,i2) => i1+i2
+        val intsCurried: Int => Int => Int = Exercise4.curry(addInts)
+        intsCurried(2)(3) mustBe 5
+        Exercise4.unCurry(intsCurried)(2,3)  mustBe 5
+
+        val repeatString : (String,Long) => String = (s,n) => (1L to n).map(_ => s).mkString
+        val repeatStringCurried: String => Long => String = Exercise4.curryGeneric(repeatString)
+        val repeatTest: Long => String =repeatStringCurried("TEST")
+        repeatTest(1) mustBe "TEST"
+        repeatTest(2) mustBe "TESTTEST"
+        repeatTest(4) mustBe "TESTTESTTESTTEST"
+
+        Exercise4.unCurryGeneric(repeatStringCurried)("TEST",3L) mustBe "TESTTESTTEST"
+    }
+  }
+
 }
 
 case class Exercise2Record(value:String)
@@ -72,3 +91,10 @@ object Exercise3{
   }
 }
 
+object Exercise4 {
+  def curry(f:(Int,Int)=>Int) : Int => Int => Int = a => b => f(a,b)
+  def unCurry(f:Int => Int=>Int) : (Int,Int) => Int = (a,b) => f(a)(b)
+
+  def curryGeneric[A,B,C](f:(A,B)=>C) : A => B => C = a => b => f(a,b)
+  def unCurryGeneric[A,B,C](f:A => B => C) : (A , B) => C = (a,b) => f(a)(b)
+}
